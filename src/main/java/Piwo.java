@@ -5,4 +5,12 @@ public class Piwo extends przedmiot{
         this.mod_do_przy=mod_do_przy;
         this.mod_do_zad=mod_do_zad;
     }
+
+    public int getLifetime() {
+        return lifetime;
+    }
+
+    public void setLifetime(int lifetime) {
+        this.lifetime = lifetime;
+    }
 }

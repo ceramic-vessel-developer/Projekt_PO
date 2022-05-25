@@ -13,4 +13,23 @@ public class Student extends postac {
         this.nazwisko=nazwisko;
         this.zasieg=zasieg;
     }
+    public void set_cordinates(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+
+    public double getP_d_s() {
+        return p_d_s;
+    }
+
+    public void setP_d_s(double p_d_s) {
+        this.p_d_s = p_d_s;
+    }
+
+    public void move(Object[][] plansza,int x, int y){
+        plansza[x][y]=plansza[this.x][this.y];
+        plansza[this.x][this.y]=0;
+        this.x=x;
+        this.y=y;
+    }
 }
