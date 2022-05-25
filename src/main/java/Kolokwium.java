@@ -6,4 +6,12 @@ public class Kolokwium extends przedmiot {
         this.mod_do_przy=mod_do_przy;
         this.mod_do_zad=mod_do_zad;
     }
+
+    void set_cordinates(int x, int y) {
+
+    }
+
+    public int[] get_cordinates(){
+        return new int[]{this.x,this.y};
+    }
 }

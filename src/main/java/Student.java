@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Student extends postac {
     private double szczescie;
     private double inteligencja;
@@ -13,23 +15,53 @@ public class Student extends postac {
         this.nazwisko=nazwisko;
         this.zasieg=zasieg;
     }
+
     public void set_cordinates(int x,int y){
         this.x=x;
         this.y=y;
     }
 
-    public double getP_d_s() {
-        return p_d_s;
+    public int[] get_cordinates(){
+        return new int[]{this.x,this.y};
     }
 
-    public void setP_d_s(double p_d_s) {
-        this.p_d_s = p_d_s;
-    }
-
-    public void move(Object[][] plansza,int x, int y){
+    public void move(obiekt[][] plansza,int x, int y){
         plansza[x][y]=plansza[this.x][this.y];
-        plansza[this.x][this.y]=0;
+        plansza[this.x][this.y]=null;
         this.x=x;
         this.y=y;
+    }
+
+    public void action(obiekt[][] plansza){
+        Random gen= new Random();
+        for(int i=0; i<this.zasieg;i++){
+            for (int j = 0; j < this.zasieg; j++) {
+                if (plansza[i][j]!=null){
+                    if (plansza[i][j].getClass()!=Prowadzacy.class){
+                        int []koordynaty=plansza[i][j].get_cordinates();
+                        if (plansza[koordynaty[0]-1][koordynaty[1]-1]==null){
+
+                            this.move(plansza,koordynaty[0]-1,koordynaty[1]-1);
+
+                        }else if (plansza[koordynaty[0]-1][koordynaty[1]]==null){
+
+                            this.move(plansza,koordynaty[0]-1,koordynaty[1]);
+
+                        }else if (plansza[koordynaty[0]][koordynaty[1]-1]==null){
+
+                            this.move(plansza,koordynaty[0],koordynaty[1]-1);
+
+                        }
+
+                    }else{
+                        //TODO mechanizm uciekania w drugą strone
+                    }
+                }else{
+                    this.move(plansza, gen.nextInt(2*this.zasieg)-this.zasieg, gen.nextInt(2*this.zasieg)-this.zasieg);
+                }
+
+            }
+        }
+
     }
 }

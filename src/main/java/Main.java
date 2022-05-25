@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
@@ -11,20 +12,33 @@ public class Main {
         return list;
     }
 
+    //TODO tu trzeba będzie zrobić method overload :((((
+    static void place_objects(ArrayList<Student> list, Object[][] plansza){
+        Random gen= new Random();
+        int x,y;
+        for (Student student:list) {
+            while (true) {
+                x = gen.nextInt(100);
+                y = gen.nextInt(100);
+                if (plansza[x][y]==null) {
+                    plansza[x][y]=student;
+                    student.set_cordinates(x,y);
+                    break;
+                }
+            }
+        }
+
+    }
 
     public static void main(String[] args) {
-        Object [][] plansza=new Object[100][100];
+        obiekt [][] plansza=new obiekt[100][100];
         Piwo kustosz=new Piwo(2,2,2);
-        System.out.println(kustosz.getClass());
         ArrayList<Student> list=make_student_list(10);
-        for (Student student:list) {
-            System.out.println(student);
+        place_objects(list,plansza);
+        for(Student student:list){
+            System.out.println(Arrays.toString(student.get_cordinates()));
         }
-        plansza[33][22]=list.get(0);
-        list.get(0).set_cordinates(33,22);
-        list.get(0).move(plansza,44,33);
-        System.out.println(plansza[33][22]);
-        System.out.println(plansza[44][33]);
+
 
     }
 

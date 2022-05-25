@@ -11,4 +11,12 @@ public class Prowadzacy extends postac{
         this.nazwisko=nazwisko;
         this.zasieg=zasieg;
     }
+
+    @Override
+    void set_cordinates(int x, int y) {
+
+    }
+    public int[] get_cordinates(){
+        return new int[]{this.x,this.y};
+    }
 }

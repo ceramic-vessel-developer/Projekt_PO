@@ -13,4 +13,13 @@ public class Piwo extends przedmiot{
     public void setLifetime(int lifetime) {
         this.lifetime = lifetime;
     }
+
+    @Override
+    void set_cordinates(int x, int y) {
+
+    }
+
+    public int[] get_cordinates(){
+        return new int[]{this.x,this.y};
+    }
 }
