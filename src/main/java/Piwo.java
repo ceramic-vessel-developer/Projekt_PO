@@ -1,17 +1,13 @@
+import java.io.PipedOutputStream;
+import java.util.ArrayList;
+
 public class Piwo extends przedmiot{
     private int lifetime;
+    static ArrayList<Piwo> list;
     public Piwo(int lifetime,int mod_do_zad,int mod_do_przy) {
         this.lifetime = lifetime;
         this.mod_do_przy=mod_do_przy;
         this.mod_do_zad=mod_do_zad;
-    }
-
-    public int getLifetime() {
-        return lifetime;
-    }
-
-    public void setLifetime(int lifetime) {
-        this.lifetime = lifetime;
     }
 
     @Override
@@ -23,8 +19,10 @@ public class Piwo extends przedmiot{
         return new int[]{this.x,this.y};
     }
 
-    /*@Override
+    @Override
     double[] use(double szczescie, double inteligencja, double studenckosc) {
+        list.remove(this);
+        return new double[]{-0.1*studenckosc*this.mod_do_przy,0.3*studenckosc*this.mod_do_zad};
 
-    }*/
+    }
 }
