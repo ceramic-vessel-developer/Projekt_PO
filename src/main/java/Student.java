@@ -48,8 +48,8 @@ public class Student extends Postac {
 		return przygotowanieDoZajec;
 	}
 
-	public void setPrzygotowanieDoZajec(double p_d_z) {
-		this.przygotowanieDoZajec = p_d_z;
+	public void setPrzygotowanieDoZajec(double przygotowanieDoZajec) {
+		this.przygotowanieDoZajec = przygotowanieDoZajec;
 	}
 
 	public double getZadowolenie() {
@@ -60,16 +60,8 @@ public class Student extends Postac {
 		this.zadowolenie = zadowolenie;
 	}
 
-	public void move(Obiekt[][] plansza, int x, int y) {
-		plansza[x][y] = plansza[this.x][this.y];
-		plansza[this.x][this.y] = null;
-
-		this.x = x;
-		this.y = y;
-	}
-
-	public void action(Obiekt[][] plansza) {
-		Random gen = new Random();
+	public void action() {
+		Random generator = new Random();
 
 		boolean stop = false;
 
@@ -83,18 +75,18 @@ public class Student extends Postac {
 					break;
 				}
 
-				if (plansza[i][j] != null) {
-					int[] koordynaty = plansza[i][j].getCoordinates();
+				if (Plansza.getPole(i, j) != null) {
+					int[] koordynaty = Plansza.getPole(i, j).getCoordinates();
 
-					if (plansza[i][j].getClass() != Prowadzacy.class) {
-						if (plansza[koordynaty[0] - 1][koordynaty[1] - 1] == null) {
-							this.move(plansza, koordynaty[0] - 1, koordynaty[1] - 1);
+					if (Plansza.getPole(i, j).getClass() != Prowadzacy.class) {
+						if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1] - 1) == null) {
+							this.move(koordynaty[0] - 1, koordynaty[1] - 1);
 							stop = true;
-						} else if (plansza[koordynaty[0] - 1][koordynaty[1]] == null) {
-							this.move(plansza, koordynaty[0] - 1, koordynaty[1]);
+						} else if (Plansza.getPole(koordynaty[0] - 1,koordynaty[1]) == null) {
+							this.move(koordynaty[0] - 1, koordynaty[1]);
 							stop = true;
-						} else if (plansza[koordynaty[0]][koordynaty[1] - 1] == null) {
-							this.move(plansza, koordynaty[0], koordynaty[1] - 1);
+						} else if (Plansza.getPole(koordynaty[0],koordynaty[1] - 1) == null) {
+							this.move(koordynaty[0], koordynaty[1] - 1);
 							stop = true;
 						}
 
@@ -107,11 +99,11 @@ public class Student extends Postac {
 
 		if (!stop) {
 			for (int i = 0; i < 10; i++) {
-				int[] xy = { this.x + gen.nextInt(this.getZasieg() * 2) - this.getZasieg(),
-						this.y + gen.nextInt(this.getZasieg() * 2) - this.getZasieg() };
+				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
 
-				if (plansza[xy[0]][xy[1]] == null) {
-					this.move(plansza, xy[0], xy[1]);
+				if (Plansza.getPole(xy[0], xy[1]) == null) {
+					this.move(xy[0], xy[1]);
 				}
 			}
 		}
