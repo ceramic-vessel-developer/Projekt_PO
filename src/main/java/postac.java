@@ -14,5 +14,8 @@ abstract class postac extends obiekt {
 abstract class przedmiot extends obiekt{
     int mod_do_zad;
     int mod_do_przy;
+
+
+    abstract double[] use(double szczescie, double inteligencja, double studenckosc);
 }
 

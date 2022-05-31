@@ -1,15 +1,19 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Student extends postac {
     private double szczescie;
     private double inteligencja;
-    private double p_d_s;
+    private double studenckosc;
+    private double p_d_z;
     private double zad;
 
-    public Student(double szczescie, double inteligencja, double p_d_s, double zad, String imie, String nazwisko, int zasieg) {
+    public Student(double szczescie, double inteligencja, double studenckosc, double p_d_z, double zad, String imie, String nazwisko, int zasieg) {
         this.szczescie = szczescie;
         this.inteligencja = inteligencja;
-        this.p_d_s = p_d_s;
+        this.studenckosc = studenckosc;
+        this.p_d_z = p_d_z;
         this.zad = zad;
         this.imie=imie;
         this.nazwisko=nazwisko;
@@ -34,34 +38,58 @@ public class Student extends postac {
 
     public void action(obiekt[][] plansza){
         Random gen= new Random();
+        boolean stop=false;
         for(int i=0; i<this.zasieg;i++){
+            if (stop){
+                break;
+            }
             for (int j = 0; j < this.zasieg; j++) {
+                if (stop){
+                    break;
+                }
                 if (plansza[i][j]!=null){
+                    int []koordynaty=plansza[i][j].get_cordinates();
                     if (plansza[i][j].getClass()!=Prowadzacy.class){
-                        int []koordynaty=plansza[i][j].get_cordinates();
+
                         if (plansza[koordynaty[0]-1][koordynaty[1]-1]==null){
 
                             this.move(plansza,koordynaty[0]-1,koordynaty[1]-1);
+                            stop=true;
 
                         }else if (plansza[koordynaty[0]-1][koordynaty[1]]==null){
 
                             this.move(plansza,koordynaty[0]-1,koordynaty[1]);
+                            stop=true;
 
                         }else if (plansza[koordynaty[0]][koordynaty[1]-1]==null){
 
                             this.move(plansza,koordynaty[0],koordynaty[1]-1);
+                            stop=true;
 
                         }
 
                     }else{
                         //TODO mechanizm uciekania w drugą strone
                     }
-                }else{
-                    this.move(plansza, gen.nextInt(2*this.zasieg)-this.zasieg, gen.nextInt(2*this.zasieg)-this.zasieg);
                 }
 
             }
         }
+
+        if (!stop){
+            for (int i = 0; i < 10; i++) {
+                int []xy= {this.x+ gen.nextInt(this.zasieg*2)-this.zasieg, this.y+gen.nextInt(this.zasieg*2)-this.zasieg};
+                if (plansza[xy[0]][xy[1]]==null) {
+                    this.move(plansza, xy[0], xy[1]);
+                }
+            }
+        }
+
+    }
+
+    public String test(ArrayList<Student> list){
+        list.remove(this);
+        return "DUPA";
 
     }
 }

@@ -22,4 +22,9 @@ public class Piwo extends przedmiot{
     public int[] get_cordinates(){
         return new int[]{this.x,this.y};
     }
+
+    @Override
+    double[] use(double szczescie, double inteligencja, double studenckosc) {
+
+    }
 }

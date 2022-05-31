@@ -7,7 +7,7 @@ public class Main {
         ArrayList<Student> list=new ArrayList<>();
         Random generator=new Random();
         for (int i = 0; i < ilosc; i++) {
-            list.add(new Student(generator.nextDouble()*10, generator.nextDouble()*10, generator.nextDouble()*10, generator.nextDouble()*10,"Michał","Korczak",generator.nextInt()));
+            list.add(new Student(generator.nextDouble()*10, generator.nextDouble()*10, generator.nextDouble()*10, generator.nextDouble()*10, generator.nextDouble()*10,"Michał","Korczak",generator.nextInt()));
         }
         return list;
     }
@@ -38,8 +38,9 @@ public class Main {
         for(Student student:list){
             System.out.println(Arrays.toString(student.get_cordinates()));
         }
-
-
+        System.out.println(list.size());
+        System.out.println(list.get(9).test(list));
+        System.out.println(list.size());
     }
 
 }
