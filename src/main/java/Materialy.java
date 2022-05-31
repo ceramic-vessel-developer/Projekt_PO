@@ -4,8 +4,8 @@ public class Materialy extends Przedmiot {
 	public static ArrayList<Materialy> list;
 
 	public Materialy(int modDoZadowolenia, int modDoPrzygotowania) {
-		this.modDoZadowolenia = modDoZadowolenia;
-		this.modDoPrzygotowania = modDoPrzygotowania;
+		this.setModDoZadowolenia(modDoZadowolenia);
+		this.setModDoPrzygotowania(modDoPrzygotowania);
 	}
 
 	@Override

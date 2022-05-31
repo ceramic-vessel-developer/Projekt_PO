@@ -6,8 +6,8 @@ public class Kolokwium extends NietrwalyPrzedmiot {
 
 	public Kolokwium(int lifetime, int modDoZadowolenia, int modDoPrzygotowania) {
 		this.setLifetime(lifetime);
-		this.modDoPrzygotowania = modDoPrzygotowania;
-		this.modDoZadowolenia = modDoZadowolenia;
+		this.setModDoZadowolenia(modDoZadowolenia);
+		this.setModDoPrzygotowania(modDoPrzygotowania);
 	}
 
 	@Override

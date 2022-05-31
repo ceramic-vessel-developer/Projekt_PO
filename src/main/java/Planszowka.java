@@ -4,8 +4,8 @@ public class Planszowka extends Przedmiot {
 	static ArrayList<Planszowka> list;
 
 	public Planszowka(int modDoZadowolenia, int modDoPrzygotowania) {
-		this.modDoZadowolenia = modDoZadowolenia;
-		this.modDoPrzygotowania = modDoPrzygotowania;
+		this.setModDoZadowolenia(modDoZadowolenia);
+		this.setModDoPrzygotowania(modDoPrzygotowania);
 	}
 
 	@Override

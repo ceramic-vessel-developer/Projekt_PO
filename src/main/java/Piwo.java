@@ -5,8 +5,8 @@ public class Piwo extends NietrwalyPrzedmiot {
 
 	public Piwo(int lifetime, int modDoZadowolenia, int modDoPrzygotowania) {
 		this.setLifetime(lifetime);
-		this.modDoZadowolenia = modDoZadowolenia;
-		this.modDoPrzygotowania = modDoPrzygotowania;
+		this.setModDoZadowolenia(modDoZadowolenia);
+		this.setModDoPrzygotowania(modDoPrzygotowania);
 	}
 
 	@Override
