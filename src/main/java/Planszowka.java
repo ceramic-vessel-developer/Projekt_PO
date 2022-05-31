@@ -13,8 +13,8 @@ public class Planszowka extends przedmiot{
         return new int[]{this.x,this.y};
     }
 
-    @Override
+    /*@Override
     double[] use(double szczescie, double inteligencja, double studenckosc) {
 
-    }
+    }*/
 }
