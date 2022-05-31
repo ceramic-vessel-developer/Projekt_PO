@@ -6,17 +6,17 @@ public class Student extends Postac {
 	private double szczescie;
 	private double inteligencja;
 	private double studenckosc;
-	private double p_d_z;
+	private double przygotowanieDoZajec;
 	private double zadowolenie;
 
-	public Student(double szczescie, double inteligencja, double studenckosc, double p_d_z, double zadowolenie,
+	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec, double zadowolenie,
 			String imie, String nazwisko, int zasieg) {
 		super(imie, nazwisko, zasieg);
 
 		this.setSzczescie(szczescie);
 		this.setInteligencja(inteligencja);
 		this.setStudenckosc(studenckosc);
-		this.setP_d_z(p_d_z);
+		this.setPrzygotowanieDoZajec(przygotowanieDoZajec);
 		this.setZadowolenie(zadowolenie);
 	}
 
@@ -44,12 +44,12 @@ public class Student extends Postac {
 		this.studenckosc = studenckosc;
 	}
 
-	public double getP_d_z() {
-		return p_d_z;
+	public double getPrzygotowanieDoZajec() {
+		return przygotowanieDoZajec;
 	}
 
-	public void setP_d_z(double p_d_z) {
-		this.p_d_z = p_d_z;
+	public void setPrzygotowanieDoZajec(double p_d_z) {
+		this.przygotowanieDoZajec = p_d_z;
 	}
 
 	public double getZadowolenie() {
