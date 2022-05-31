@@ -1,23 +1,38 @@
 public class Prowadzacy extends Postac {
 	private String stopien;
 	private int surowosc;
-	private int respekt;
+	private int szacunek;
 
-	public Prowadzacy(String stopien, int surowosc, int respekt, String imie, String nazwisko, int zasieg) {
+	public Prowadzacy(String stopien, int surowosc, int szacunek, String imie, String nazwisko, int zasieg) {
+		super(imie, nazwisko, zasieg);
+
+		this.setStopien(stopien);
+		this.setSurowosc(surowosc);
+		this.setSzacunek(szacunek);
+	}
+
+	public String getStopien() {
+		return stopien;
+	}
+
+	public void setStopien(String stopien) {
 		this.stopien = stopien;
+	}
+
+	public int getSurowosc() {
+		return surowosc;
+	}
+
+	public void setSurowosc(int surowosc) {
 		this.surowosc = surowosc;
-		this.respekt = respekt;
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-		this.zasieg = zasieg;
 	}
 
-	@Override
-	void set_cordinates(int x, int y) {
-
+	public int getSzacunek() {
+		return szacunek;
 	}
 
-	public int[] get_cordinates() {
-		return new int[] { this.x, this.y };
+	public void setSzacunek(int szacunek) {
+		this.szacunek = szacunek;
 	}
+
 }

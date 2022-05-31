@@ -1,4 +1,4 @@
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,27 +7,57 @@ public class Student extends Postac {
 	private double inteligencja;
 	private double studenckosc;
 	private double p_d_z;
-	private double zad;
+	private double zadowolenie;
 
-	public Student(double szczescie, double inteligencja, double studenckosc, double p_d_z, double zad, String imie,
-			String nazwisko, int zasieg) {
+	public Student(double szczescie, double inteligencja, double studenckosc, double p_d_z, double zadowolenie,
+			String imie, String nazwisko, int zasieg) {
+		super(imie, nazwisko, zasieg);
+
+		this.setSzczescie(szczescie);
+		this.setInteligencja(inteligencja);
+		this.setStudenckosc(studenckosc);
+		this.setP_d_z(p_d_z);
+		this.setZadowolenie(zadowolenie);
+	}
+
+	public double getSzczescie() {
+		return szczescie;
+	}
+
+	public void setSzczescie(double szczescie) {
 		this.szczescie = szczescie;
+	}
+
+	public double getInteligencja() {
+		return inteligencja;
+	}
+
+	public void setInteligencja(double inteligencja) {
 		this.inteligencja = inteligencja;
+	}
+
+	public double getStudenckosc() {
+		return studenckosc;
+	}
+
+	public void setStudenckosc(double studenckosc) {
 		this.studenckosc = studenckosc;
+	}
+
+	public double getP_d_z() {
+		return p_d_z;
+	}
+
+	public void setP_d_z(double p_d_z) {
 		this.p_d_z = p_d_z;
-		this.zad = zad;
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-		this.zasieg = zasieg;
 	}
 
-	public void set_cordinates(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public double getZadowolenie() {
+		return zadowolenie;
 	}
 
-	public int[] get_cordinates() {
-		return new int[] { this.x, this.y };
+	public void setZadowolenie(double zadowolenie) {
+		this.zadowolenie = zadowolenie;
 	}
 
 	public void move(Obiekt[][] plansza, int x, int y) {
@@ -43,18 +73,18 @@ public class Student extends Postac {
 
 		boolean stop = false;
 
-		for (int i = 0; i < this.zasieg; i++) {
+		for (int i = 0; i < this.getZasieg(); i++) {
 			if (stop) {
 				break;
 			}
 
-			for (int j = 0; j < this.zasieg; j++) {
+			for (int j = 0; j < this.getZasieg(); j++) {
 				if (stop) {
 					break;
 				}
 
 				if (plansza[i][j] != null) {
-					int[] koordynaty = plansza[i][j].get_cordinates();
+					int[] koordynaty = plansza[i][j].getCoordinates();
 
 					if (plansza[i][j].getClass() != Prowadzacy.class) {
 						if (plansza[koordynaty[0] - 1][koordynaty[1] - 1] == null) {
@@ -77,8 +107,8 @@ public class Student extends Postac {
 
 		if (!stop) {
 			for (int i = 0; i < 10; i++) {
-				int[] xy = { this.x + gen.nextInt(this.zasieg * 2) - this.zasieg,
-						this.y + gen.nextInt(this.zasieg * 2) - this.zasieg };
+				int[] xy = { this.x + gen.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + gen.nextInt(this.getZasieg() * 2) - this.getZasieg() };
 
 				if (plansza[xy[0]][xy[1]] == null) {
 					this.move(plansza, xy[0], xy[1]);

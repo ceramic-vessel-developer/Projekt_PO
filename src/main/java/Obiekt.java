@@ -1,9 +1,14 @@
 
 abstract class Obiekt {
-	int x;
-	int y;
+	protected int x;
+	protected int y;
 
-	abstract void set_cordinates(int x, int y);
+	public int[] getCoordinates() {
+		return new int[] { this.x, this.y };
+	}
 
-	abstract int[] get_cordinates();
+	public void setCoordinates(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 }

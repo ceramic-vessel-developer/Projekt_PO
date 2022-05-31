@@ -30,7 +30,7 @@ public class Main {
 				if (plansza[x][y] == null) {
 					plansza[x][y] = student;
 
-					student.set_cordinates(x, y);
+					student.setCoordinates(x, y);
 
 					break;
 				}
@@ -43,13 +43,13 @@ public class Main {
 		Obiekt[][] plansza = new Obiekt[100][100];
 		ArrayList<Student> list = make_student_list(10);
 		Piwo kustosz = new Piwo(2, 2, 2);
-		
+
 		place_objects(list, plansza);
-		
+
 		for (Student student : list) {
-			System.out.println(Arrays.toString(student.get_cordinates()));
+			System.out.println(Arrays.toString(student.getCoordinates()));
 		}
-		
+
 		System.out.println(list.size());
 		System.out.println(list.get(9).test(list));
 		System.out.println(list.size());
