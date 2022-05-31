@@ -16,6 +16,6 @@ abstract class przedmiot extends obiekt{
     int mod_do_przy;
 
 
-    //abstract double[] use(double szczescie, double inteligencja, double studenckosc);
+    abstract double[] use(double szczescie, double inteligencja, double studenckosc);
 }
 
