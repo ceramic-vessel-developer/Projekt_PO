@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Planszowka extends Przedmiot {
-	static ArrayList<Planszowka> list;
+	private static ArrayList<Planszowka> list;
 
 	public Planszowka(int modDoZadowolenia, int modDoPrzygotowania) {
 		this.setModDoZadowolenia(modDoZadowolenia);

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Piwo extends NietrwalyPrzedmiot {
-	static ArrayList<Piwo> list;
+	private static ArrayList<Piwo> list;
 
 	public Piwo(int lifetime, int modDoZadowolenia, int modDoPrzygotowania) {
 		this.setLifetime(lifetime);

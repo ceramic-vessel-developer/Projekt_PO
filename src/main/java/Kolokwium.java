@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Kolokwium extends NietrwalyPrzedmiot {
-	public static ArrayList<Kolokwium> list;
+	private static ArrayList<Kolokwium> list;
 
 	public Kolokwium(int lifetime, int modDoZadowolenia, int modDoPrzygotowania) {
 		this.setLifetime(lifetime);

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Materialy extends Przedmiot {
-	public static ArrayList<Materialy> list;
+	private static ArrayList<Materialy> list;
 
 	public Materialy(int modDoZadowolenia, int modDoPrzygotowania) {
 		this.setModDoZadowolenia(modDoZadowolenia);
