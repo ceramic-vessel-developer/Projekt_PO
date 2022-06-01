@@ -34,7 +34,32 @@ public class Main {
 	}
 
 	public static void wykonajCykl() {
+		Random generator = new Random();
+
 		sprawdzDzien();
+
+		for (Student student : Student.getList()) {
+			// 33% probability of being happier today
+			if (generator.nextInt(2) == 0) {
+				student.changeZadowolenie(generator.nextDouble() * 25);
+			}
+			// 25% probability of being more sad today
+			else if (generator.nextInt(3) == 0) {
+				student.changeZadowolenie(generator.nextDouble() * -15);
+			}
+		}
+
+		if (typDnia == TypDnia.KOLOKWIUM) {
+			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
+				prowadzacy.changeSurowosc(15);
+			}
+		}
+
+		if (typDnia == TypDnia.SESJA) {
+			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
+				prowadzacy.changeSurowosc(25);
+			}
+		}
 	}
 
 	public static void main(String[] args) {

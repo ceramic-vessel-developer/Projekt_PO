@@ -15,9 +15,9 @@ public class Student extends Postac {
 			double zadowolenie, String imie, String nazwisko, int zasieg) {
 		super(imie, nazwisko, zasieg);
 
-		this.setSzczescie(szczescie);
-		this.setInteligencja(inteligencja);
-		this.setStudenckosc(studenckosc);
+		this.szczescie = szczescie;
+		this.inteligencja = inteligencja;
+		this.studenckosc = studenckosc;
 		this.setPrzygotowanieDoZajec(przygotowanieDoZajec);
 		this.setZadowolenie(zadowolenie);
 	}
@@ -34,24 +34,13 @@ public class Student extends Postac {
 		return szczescie;
 	}
 
-	public void setSzczescie(double szczescie) {
-		this.szczescie = szczescie;
-	}
 
 	public double getInteligencja() {
 		return inteligencja;
 	}
 
-	public void setInteligencja(double inteligencja) {
-		this.inteligencja = inteligencja;
-	}
-
 	public double getStudenckosc() {
 		return studenckosc;
-	}
-
-	public void setStudenckosc(double studenckosc) {
-		this.studenckosc = studenckosc;
 	}
 
 	public double getPrzygotowanieDoZajec() {
@@ -62,6 +51,10 @@ public class Student extends Postac {
 		this.przygotowanieDoZajec = przygotowanieDoZajec;
 	}
 
+	public void changePrzygotowanieDoZajec(double przygotowanieDoZajec) {
+		this.przygotowanieDoZajec += przygotowanieDoZajec;
+	}
+	
 	public double getZadowolenie() {
 		return zadowolenie;
 	}
@@ -70,6 +63,10 @@ public class Student extends Postac {
 		this.zadowolenie = zadowolenie;
 	}
 
+	public void changeZadowolenie(double zadowolenie) {
+		this.zadowolenie += zadowolenie;
+	}
+	
 	public static ArrayList<Student> generate_list(int ilosc) {
 		ArrayList<Student> list = new ArrayList<>();
 		Random generator = new Random();
@@ -77,7 +74,7 @@ public class Student extends Postac {
 		for (int i = 0; i < ilosc; i++) {
 			list.add(new Student(generator.nextDouble() * 10, generator.nextDouble() * 10, generator.nextDouble() * 10,
 					generator.nextDouble() * 10, generator.nextDouble() * 10, "Jan", "Najemnik",
-					generator.nextInt()));
+					generator.nextInt(20) + 10));
 		}
 
 		return list;

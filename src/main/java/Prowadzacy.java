@@ -58,7 +58,7 @@ public class Prowadzacy extends Postac {
 
 		for (int i = 0; i < ilosc; i++) {
 			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextInt() * 10, generator.nextInt() * 10, "Damian",
-					"Mrozo", generator.nextInt()));
+					"Mrozo", generator.nextInt(15) + 7));
 		}
 
 		return list;
