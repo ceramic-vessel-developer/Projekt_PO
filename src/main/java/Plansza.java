@@ -94,6 +94,7 @@ public class Plansza {
 		int i = 0;
 		
 		for (Obiekt obiekt : obiekty) {
+			// math magic formula
 			int distance = (int) Math.sqrt(Math.pow(fromObiekt.x - obiekt.x, 2) + Math.pow(fromObiekt.y - obiekt.y, 2));
 			
 			distances[i] = distance;

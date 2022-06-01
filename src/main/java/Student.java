@@ -86,7 +86,7 @@ public class Student extends Postac {
 	public void action() {
 		Random generator = new Random();
 
-		if (this.focusedObject == null) {
+		if (this.focusedItem == null) {
 			ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
 
 			if (obiekty.isEmpty()) {
@@ -98,13 +98,14 @@ public class Student extends Postac {
 
 			int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
 
-			this.focusedObject = obiekty.get(nearestObjectInfo[0]);
+			this.focusedItem = (Przedmiot) obiekty.get(nearestObjectInfo[0]);
 		}
 
 		boolean stop = false;
 
-		int[] koordynaty = this.focusedObject.getCoordinates();
+		int[] koordynaty = this.focusedItem.getCoordinates();
 
+		// teleport near the found object
 		if (!stop && Plansza.isValidCoords(koordynaty[0] - 1, koordynaty[1] - 1)) {
 			if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1] - 1) == null) {
 				this.move(koordynaty[0] - 1, koordynaty[1] - 1);
@@ -122,6 +123,14 @@ public class Student extends Postac {
 			}
 		}
 
+		// use object if found
+		if (stop) {
+			this.focusedItem.use(szczescie, inteligencja, studenckosc);
+			
+			return;
+		}
+		
+		// crawl like pathetic being in case of searching
 		if (!stop) {
 			for (int i = 0; i < 10; i++) {
 				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
@@ -132,7 +141,6 @@ public class Student extends Postac {
 				}
 			}
 		}
-
 	}
 
 	public String test(ArrayList<Student> list) {

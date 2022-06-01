@@ -3,7 +3,7 @@ abstract class Postac extends Obiekt {
 	protected String nazwisko;
 	protected int zasieg;
 	
-	protected Obiekt focusedObject;
+	protected Przedmiot focusedItem;
 
 	protected Postac(String imie, String nazwisko, int zasieg) {
 		this.imie = imie;
