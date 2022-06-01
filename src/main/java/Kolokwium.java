@@ -10,6 +10,14 @@ public class Kolokwium extends NietrwalyPrzedmiot {
 		this.setModDoPrzygotowania(modDoPrzygotowania);
 	}
 
+	public static ArrayList<Kolokwium> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<Kolokwium> list) {
+		Kolokwium.list = list;
+	}
+	
 	@Override
 	public double[] use(double szczescie, double inteligencja, double studenckosc) {
 		Random generator = new Random();

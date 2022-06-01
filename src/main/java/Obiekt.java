@@ -11,7 +11,7 @@ abstract class Obiekt {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public void move(int x, int y) {
 		Plansza.setPole(x, y, Plansza.getPole(this.x, this.y));
 		Plansza.setPole(this.x, this.y, null);

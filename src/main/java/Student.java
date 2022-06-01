@@ -3,14 +3,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Student extends Postac {
+	private static ArrayList<Student> list;
+
 	private double szczescie;
 	private double inteligencja;
 	private double studenckosc;
 	private double przygotowanieDoZajec;
 	private double zadowolenie;
 
-	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec, double zadowolenie,
-			String imie, String nazwisko, int zasieg) {
+	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec,
+			double zadowolenie, String imie, String nazwisko, int zasieg) {
 		super(imie, nazwisko, zasieg);
 
 		this.setSzczescie(szczescie);
@@ -18,6 +20,14 @@ public class Student extends Postac {
 		this.setStudenckosc(studenckosc);
 		this.setPrzygotowanieDoZajec(przygotowanieDoZajec);
 		this.setZadowolenie(zadowolenie);
+	}
+
+	public static ArrayList<Student> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<Student> list) {
+		Student.list = list;
 	}
 
 	public double getSzczescie() {
@@ -60,6 +70,19 @@ public class Student extends Postac {
 		this.zadowolenie = zadowolenie;
 	}
 
+	public static ArrayList<Student> generate_list(int ilosc) {
+		ArrayList<Student> list = new ArrayList<>();
+		Random generator = new Random();
+
+		for (int i = 0; i < ilosc; i++) {
+			list.add(new Student(generator.nextDouble() * 10, generator.nextDouble() * 10, generator.nextDouble() * 10,
+					generator.nextDouble() * 10, generator.nextDouble() * 10, "Michał", "Korczak",
+					generator.nextInt()));
+		}
+
+		return list;
+	}
+
 	public void action() {
 		Random generator = new Random();
 
@@ -82,10 +105,10 @@ public class Student extends Postac {
 						if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1] - 1) == null) {
 							this.move(koordynaty[0] - 1, koordynaty[1] - 1);
 							stop = true;
-						} else if (Plansza.getPole(koordynaty[0] - 1,koordynaty[1]) == null) {
+						} else if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1]) == null) {
 							this.move(koordynaty[0] - 1, koordynaty[1]);
 							stop = true;
-						} else if (Plansza.getPole(koordynaty[0],koordynaty[1] - 1) == null) {
+						} else if (Plansza.getPole(koordynaty[0], koordynaty[1] - 1) == null) {
 							this.move(koordynaty[0], koordynaty[1] - 1);
 							stop = true;
 						}

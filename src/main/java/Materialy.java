@@ -8,6 +8,14 @@ public class Materialy extends Przedmiot {
 		this.setModDoPrzygotowania(modDoPrzygotowania);
 	}
 
+	public static ArrayList<Materialy> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<Materialy> list) {
+		Materialy.list = list;
+	}
+	
 	@Override
 	public double[] use(double szczescie, double inteligencja, double studenckosc) {
 		list.remove(this);

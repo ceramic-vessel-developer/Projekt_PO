@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+
 public class Prowadzacy extends Postac {
+	private static ArrayList<Prowadzacy> list;
+	
 	private String stopien;
 	private int surowosc;
 	private int szacunek;
@@ -11,6 +15,14 @@ public class Prowadzacy extends Postac {
 		this.setSzacunek(szacunek);
 	}
 
+	public static ArrayList<Prowadzacy> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<Prowadzacy> list) {
+		Prowadzacy.list = list;
+	}
+	
 	public String getStopien() {
 		return stopien;
 	}
