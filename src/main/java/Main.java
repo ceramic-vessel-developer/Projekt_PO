@@ -38,6 +38,7 @@ public class Main {
 
 		sprawdzDzien();
 
+		// random daily event
 		for (Student student : Student.getList()) {
 			// 33% probability of being happier today
 			if (generator.nextInt(2) == 0) {
@@ -49,12 +50,30 @@ public class Main {
 			}
 		}
 
+		// 20% probability of generating new kolokwium on map
+		if (generator.nextInt(4) == 0) {
+			ArrayList<Kolokwium> kolokwia = Kolokwium.generate_list(1);
+			
+			Plansza.placeObjectsInRandomOrder(kolokwia);
+			Kolokwium.addToList(kolokwia);
+		}
+		
+		// 25% probability of generating new uzywka on map
+		if (generator.nextInt(3) == 0) {
+			ArrayList<Piwo> piwa = Piwo.generate_list(1);
+			
+			Plansza.placeObjectsInRandomOrder(piwa);
+			Piwo.addToList(piwa);
+		}
+		
+		// kolokwium event
 		if (typDnia == TypDnia.KOLOKWIUM) {
 			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
 				prowadzacy.changeSurowosc(15);
 			}
 		}
 
+		// sesja event
 		if (typDnia == TypDnia.SESJA) {
 			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
 				prowadzacy.changeSurowosc(25);
@@ -68,12 +87,14 @@ public class Main {
 		// random generation of actors
 		Student.setList(Student.generate_list(50));
 		Prowadzacy.setList(Prowadzacy.generate_list(10));
+		Kolokwium.setList(Kolokwium.generate_list(25));
+		Piwo.setList(Piwo.generate_list(25));
 
 		// random displacement of actors
 		Plansza.placeObjectsInRandomOrder(Student.getList());
 		Plansza.placeObjectsInRandomOrder(Prowadzacy.getList());
-
-		Piwo kustosz = new Piwo(2, 2, 2);
+		Plansza.placeObjectsInRandomOrder(Kolokwium.getList());
+		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
 		for (Student student : Student.getList()) {
 			System.out.println(Arrays.toString(student.getCoordinates()));

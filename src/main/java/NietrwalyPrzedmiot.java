@@ -9,4 +9,8 @@ abstract class NietrwalyPrzedmiot extends Przedmiot {
 	public void setLifetime(int lifetime) {
 		this.lifetime = lifetime;
 	}
+	
+	public void cycleLifetime() {
+		this.lifetime--;
+	}
 }

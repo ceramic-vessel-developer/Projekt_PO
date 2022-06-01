@@ -23,6 +23,10 @@ public class Prowadzacy extends Postac {
 	public static void setList(ArrayList<Prowadzacy> list) {
 		Prowadzacy.list = list;
 	}
+	
+	public static void addToList(ArrayList<Prowadzacy> list) {
+		Prowadzacy.list.addAll(list);
+	}
 
 	public Tytul getStopien() {
 		return stopien;

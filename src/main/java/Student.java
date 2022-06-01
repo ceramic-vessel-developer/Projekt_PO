@@ -29,6 +29,10 @@ public class Student extends Postac {
 	public static void setList(ArrayList<Student> list) {
 		Student.list = list;
 	}
+	
+	public static void addToList(ArrayList<Student> list) {
+		Student.list.addAll(list);
+	}
 
 	public double getSzczescie() {
 		return szczescie;
