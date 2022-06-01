@@ -76,7 +76,7 @@ public class Student extends Postac {
 
 		for (int i = 0; i < ilosc; i++) {
 			list.add(new Student(generator.nextDouble() * 10, generator.nextDouble() * 10, generator.nextDouble() * 10,
-					generator.nextDouble() * 10, generator.nextDouble() * 10, "Michał", "Korczak",
+					generator.nextDouble() * 10, generator.nextDouble() * 10, "Jan", "Najemnik",
 					generator.nextInt()));
 		}
 

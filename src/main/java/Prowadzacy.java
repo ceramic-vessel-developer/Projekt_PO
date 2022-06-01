@@ -1,13 +1,14 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Prowadzacy extends Postac {
 	private static ArrayList<Prowadzacy> list;
-	
-	private String stopien;
+
+	private Tytul stopien;
 	private int surowosc;
 	private int szacunek;
 
-	public Prowadzacy(String stopien, int surowosc, int szacunek, String imie, String nazwisko, int zasieg) {
+	public Prowadzacy(Tytul stopien, int surowosc, int szacunek, String imie, String nazwisko, int zasieg) {
 		super(imie, nazwisko, zasieg);
 
 		this.setStopien(stopien);
@@ -22,12 +23,12 @@ public class Prowadzacy extends Postac {
 	public static void setList(ArrayList<Prowadzacy> list) {
 		Prowadzacy.list = list;
 	}
-	
-	public String getStopien() {
+
+	public Tytul getStopien() {
 		return stopien;
 	}
 
-	public void setStopien(String stopien) {
+	public void setStopien(Tytul stopien) {
 		this.stopien = stopien;
 	}
 
@@ -39,6 +40,10 @@ public class Prowadzacy extends Postac {
 		this.surowosc = surowosc;
 	}
 
+	public void changeSurowosc(int surowosc) {
+		this.surowosc += surowosc;
+	}
+
 	public int getSzacunek() {
 		return szacunek;
 	}
@@ -47,4 +52,15 @@ public class Prowadzacy extends Postac {
 		this.szacunek = szacunek;
 	}
 
+	public static ArrayList<Prowadzacy> generate_list(int ilosc) {
+		ArrayList<Prowadzacy> list = new ArrayList<>();
+		Random generator = new Random();
+
+		for (int i = 0; i < ilosc; i++) {
+			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextInt() * 10, generator.nextInt() * 10, "Damian",
+					"Mrozo", generator.nextInt()));
+		}
+
+		return list;
+	}
 }
