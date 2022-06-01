@@ -29,7 +29,7 @@ public class Student extends Postac {
 	public static void setList(ArrayList<Student> list) {
 		Student.list = list;
 	}
-	
+
 	public static void addToList(ArrayList<Student> list) {
 		Student.list.addAll(list);
 	}
@@ -37,7 +37,6 @@ public class Student extends Postac {
 	public double getSzczescie() {
 		return szczescie;
 	}
-
 
 	public double getInteligencja() {
 		return inteligencja;
@@ -58,7 +57,7 @@ public class Student extends Postac {
 	public void changePrzygotowanieDoZajec(double przygotowanieDoZajec) {
 		this.przygotowanieDoZajec += przygotowanieDoZajec;
 	}
-	
+
 	public double getZadowolenie() {
 		return zadowolenie;
 	}
@@ -70,7 +69,7 @@ public class Student extends Postac {
 	public void changeZadowolenie(double zadowolenie) {
 		this.zadowolenie += zadowolenie;
 	}
-	
+
 	public static ArrayList<Student> generate_list(int ilosc) {
 		ArrayList<Student> list = new ArrayList<>();
 		Random generator = new Random();
@@ -87,37 +86,39 @@ public class Student extends Postac {
 	public void action() {
 		Random generator = new Random();
 
-		boolean stop = false;
+		if (this.focusedObject == null) {
+			ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
 
-		for (int i = 0; i < this.getZasieg(); i++) {
-			if (stop) {
-				break;
+			if (obiekty.isEmpty()) {
+				// cmon do something
+				return;
 			}
 
-			for (int j = 0; j < this.getZasieg(); j++) {
-				if (stop) {
-					break;
-				}
+			int[] odleglosci = Plansza.calculateDistances(this, obiekty);
 
-				if (Plansza.getPole(i, j) != null) {
-					int[] koordynaty = Plansza.getPole(i, j).getCoordinates();
+			int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
 
-					if (Plansza.getPole(i, j).getClass() != Prowadzacy.class) {
-						if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1] - 1) == null) {
-							this.move(koordynaty[0] - 1, koordynaty[1] - 1);
-							stop = true;
-						} else if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1]) == null) {
-							this.move(koordynaty[0] - 1, koordynaty[1]);
-							stop = true;
-						} else if (Plansza.getPole(koordynaty[0], koordynaty[1] - 1) == null) {
-							this.move(koordynaty[0], koordynaty[1] - 1);
-							stop = true;
-						}
+			this.focusedObject = obiekty.get(nearestObjectInfo[0]);
+		}
 
-					} else {
-						// TODO mechanizm uciekania w drugą strone
-					}
-				}
+		boolean stop = false;
+
+		int[] koordynaty = this.focusedObject.getCoordinates();
+
+		if (!stop && Plansza.isValidCoords(koordynaty[0] - 1, koordynaty[1] - 1)) {
+			if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1] - 1) == null) {
+				this.move(koordynaty[0] - 1, koordynaty[1] - 1);
+				stop = true;
+			}
+		} else if (!stop && Plansza.isValidCoords(koordynaty[0] - 1, koordynaty[1])) {
+			if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1]) == null) {
+				this.move(koordynaty[0] - 1, koordynaty[1]);
+				stop = true;
+			}
+		} else if (!stop && Plansza.isValidCoords(koordynaty[0], koordynaty[1] - 1)) {
+			if (Plansza.getPole(koordynaty[0], koordynaty[1] - 1) == null) {
+				this.move(koordynaty[0], koordynaty[1] - 1);
+				stop = true;
 			}
 		}
 
