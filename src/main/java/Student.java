@@ -142,9 +142,4 @@ public class Student extends Postac {
 			}
 		}
 	}
-
-	public String test(ArrayList<Student> list) {
-		list.remove(this);
-		return "DUPA";
-	}
 }

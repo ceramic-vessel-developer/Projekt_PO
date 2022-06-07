@@ -82,6 +82,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Program zostal uruchomiony poprawnie\nTest rozmieszczenia obiektow:");
 		Plansza plansza = new Plansza(100, 100);
 
 		// random generation of actors
@@ -105,8 +106,7 @@ public class Main {
 		}
 
 		System.out.println(Student.getList().size());
-		System.out.println(Student.getList().get(9).test(Student.getList()));
-		System.out.println(Student.getList().size());
+		System.out.println("Koniec dzialania programu");
 	}
 
 }
