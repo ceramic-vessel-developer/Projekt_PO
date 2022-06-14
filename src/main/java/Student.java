@@ -10,16 +10,22 @@ public class Student extends Postac {
 	private double studenckosc;
 	private double przygotowanieDoZajec;
 	private double zadowolenie;
+	private int ects;
 
 	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec,
-			double zadowolenie, String imie, String nazwisko, int zasieg) {
+				   double zadowolenie, String imie, String nazwisko, int zasieg, int ects) {
 		super(imie, nazwisko, zasieg);
 
 		this.szczescie = szczescie;
 		this.inteligencja = inteligencja;
 		this.studenckosc = studenckosc;
+		this.ects = ects;
 		this.setPrzygotowanieDoZajec(przygotowanieDoZajec);
 		this.setZadowolenie(zadowolenie);
+	}
+
+	public void changeEcts(int modEcts){
+		this.ects += modEcts;
 	}
 
 	public static ArrayList<Student> getList() {
@@ -77,10 +83,73 @@ public class Student extends Postac {
 		for (int i = 0; i < ilosc; i++) {
 			list.add(new Student(generator.nextDouble() * 10, generator.nextDouble() * 10, generator.nextDouble() * 10,
 					generator.nextDouble() * 10, generator.nextDouble() * 10, "Jan", "Najemnik",
-					generator.nextInt(20) + 10));
+					generator.nextInt(20) + 10, 30));
 		}
 
 		return list;
+	}
+
+	public void runaway(int x, int y){
+		boolean stop=false;
+		if (x>this.x && y>this.y){
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop){
+					break;
+				}
+				for (int j = 0; j <this.zasieg ; j++) {
+					if (Plansza.getPole(this.x-zasieg+i,this.y-zasieg+j)==null && Plansza.isValidCoords(this.x-zasieg+i,this.y-zasieg+j)){
+						this.move(this.x-zasieg+i,this.y-zasieg+j);
+						stop=true;
+						break;
+					}
+				}
+
+			}
+
+		}else if (x<this.x && y>this.y){
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop){
+					break;
+				}
+				for (int j = 0; j <this.zasieg ; j++) {
+					if (Plansza.getPole(this.x+zasieg-i,this.y-zasieg+j)==null && Plansza.isValidCoords(this.x+zasieg-i,this.y-zasieg+j)){
+						this.move(this.x+zasieg-i,this.y-zasieg+j);
+						stop=true;
+						break;
+					}
+				}
+
+			}
+		}if (x>this.x && y<this.y){
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop){
+					break;
+				}
+				for (int j = 0; j <this.zasieg ; j++) {
+					if (Plansza.getPole(this.x-zasieg+i,this.y+zasieg-j)==null && Plansza.isValidCoords(this.x-zasieg+i,this.y+zasieg-j)){
+						this.move(this.x-zasieg+i,this.y+zasieg-j);
+						stop=true;
+						break;
+					}
+				}
+
+			}
+
+		}else if (x<this.x && y<this.y){
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop){
+					break;
+				}
+				for (int j = 0; j <this.zasieg ; j++) {
+					if (Plansza.getPole(this.x+zasieg-i,this.y+zasieg-j)==null && Plansza.isValidCoords(this.x+zasieg-i,this.y+zasieg-j)){
+						this.move(this.x+zasieg-i,this.y+zasieg-j);
+						stop=true;
+						break;
+					}
+				}
+			}
+
+		}
 	}
 
 	public void action() {
@@ -109,6 +178,8 @@ public class Student extends Postac {
 
 		if(obiekty.get(nearestObjectInfo[0]).getClass().getName().equals("Prowadzacy")){
 			// run for your life
+			int []kor = obiekty.get(nearestObjectInfo[0]).getCoordinates();
+			this.runaway(kor[0],kor[1]);
 			return;
 		}
 
