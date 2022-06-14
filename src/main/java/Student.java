@@ -86,60 +86,46 @@ public class Student extends Postac {
 	public void action() {
 		Random generator = new Random();
 
-		if (this.focusedItem == null) {
-			ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
 
-			if (obiekty.isEmpty()) {
-				// cmon do something
-				return;
-			}
+		ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
 
-			int[] odleglosci = Plansza.calculateDistances(this, obiekty);
-
-			int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
-
-			this.focusedItem = (Przedmiot) obiekty.get(nearestObjectInfo[0]);
-		}
-
-		boolean stop = false;
-
-		int[] koordynaty = this.focusedItem.getCoordinates();
-
-		// teleport near the found object
-		if (!stop && Plansza.isValidCoords(koordynaty[0] - 1, koordynaty[1] - 1)) {
-			if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1] - 1) == null) {
-				this.move(koordynaty[0] - 1, koordynaty[1] - 1);
-				stop = true;
-			}
-		} else if (!stop && Plansza.isValidCoords(koordynaty[0] - 1, koordynaty[1])) {
-			if (Plansza.getPole(koordynaty[0] - 1, koordynaty[1]) == null) {
-				this.move(koordynaty[0] - 1, koordynaty[1]);
-				stop = true;
-			}
-		} else if (!stop && Plansza.isValidCoords(koordynaty[0], koordynaty[1] - 1)) {
-			if (Plansza.getPole(koordynaty[0], koordynaty[1] - 1) == null) {
-				this.move(koordynaty[0], koordynaty[1] - 1);
-				stop = true;
-			}
-		}
-
-		// use object if found
-		if (stop) {
-			this.focusedItem.use(szczescie, inteligencja, studenckosc);
-			
-			return;
-		}
-		
-		// crawl like pathetic being in case of searching
-		if (!stop) {
+		if (obiekty.isEmpty()) {
+			// crawl like pathetic being in case of searching
 			for (int i = 0; i < 10; i++) {
-				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
-						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
+				int[] xy = {this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg()};
 
 				if (Plansza.getPole(xy[0], xy[1]) == null) {
 					this.move(xy[0], xy[1]);
+					break;
 				}
 			}
+			return;
 		}
+
+		int[] odleglosci = Plansza.calculateDistances(this, obiekty);
+
+		int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
+
+		if(obiekty.get(nearestObjectInfo[0]).getClass().getName().equals("Prowadzacy")){
+			// run for your life
+			return;
+		}
+
+		this.focusedItem = (Przedmiot) obiekty.get(nearestObjectInfo[0]);
+
+
+
+		int[] koordynaty = this.focusedItem.getCoordinates();
+
+		// teleport to the found object, and use it
+		double[] mods=this.focusedItem.use(szczescie, inteligencja, studenckosc);
+		this.move(koordynaty[0],koordynaty[1]);
+		this.changePrzygotowanieDoZajec(mods[0]);
+		this.changeZadowolenie(mods[1]);
+
+
+
+
 	}
 }
