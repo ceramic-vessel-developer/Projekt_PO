@@ -81,15 +81,50 @@ public class Main {
 		}
 	}
 
+	public static void visualization(Plansza plansza){
+
+		for (int i = 0; i < plansza.getSzerokosc()+2; i++) {
+			System.out.print('-');
+		}
+
+		System.out.print('\n');
+
+		for (int i = 0; i < plansza.getDlugosc(); i++) {
+			System.out.print('|');
+
+			for (int j = 0; j < plansza.getSzerokosc(); j++) {
+				if(plansza.getPole(i,j)!=null) {
+					String classname = plansza.getPole(i, j).getClass().getName();
+
+					if(classname.equals("Student")){
+						System.out.print('S');
+					}else if(classname.equals("Prowadzacy")){
+						System.out.print('P');
+					}else{
+						System.out.print('O');
+					}
+
+				}else{
+					System.out.print(' ');
+				}
+			}
+			System.out.print("|\n");
+		}
+		for (int i = 0; i < plansza.getSzerokosc()+2; i++) {
+			System.out.print('-');
+		}
+		System.out.print('\n');
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Program zostal uruchomiony poprawnie\nTest rozmieszczenia obiektow:");
-		Plansza plansza = new Plansza(100, 100);
+		Plansza plansza = new Plansza(50, 100);
 
 		// random generation of actors
-		Student.setList(Student.generate_list(50));
-		Prowadzacy.setList(Prowadzacy.generate_list(10));
-		Kolokwium.setList(Kolokwium.generate_list(25));
-		Piwo.setList(Piwo.generate_list(25));
+		Student.setList(Student.generate_list(25));
+		Prowadzacy.setList(Prowadzacy.generate_list(5));
+		Kolokwium.setList(Kolokwium.generate_list(12));
+		Piwo.setList(Piwo.generate_list(12));
 
 		// random displacement of actors
 		Plansza.placeObjectsInRandomOrder(Student.getList());
@@ -104,7 +139,7 @@ public class Main {
 		for (int i = 1; i <= LICZBA_DNI_SEMESTRU /* * LICZBA_SEMESTROW */; i++) {
 			wykonajCykl();
 		}
-
+		visualization(plansza);
 		System.out.println(Student.getList().size());
 		System.out.println("Koniec dzialania programu");
 	}
