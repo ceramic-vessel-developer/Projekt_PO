@@ -29,15 +29,17 @@ public class Main {
 		for (int i = dzienPierwszegoKolowkium; i < DZIEN_SESJI; i += dzienPierwszegoKolowkium) {
 			if (dzien == i) {
 				typDnia = TypDnia.KOLOKWIUM;
+				break;
 			}
 		}
+		dzien+=1;
 	}
 
 	public static void wykonajCykl() {
 		Random generator = new Random();
 
 		sprawdzDzien();
-
+		/*
 		// random daily event
 		for (Student student : Student.getList()) {
 			// 33% probability of being happier today
@@ -49,7 +51,7 @@ public class Main {
 				student.changeZadowolenie(generator.nextDouble() * -15);
 			}
 		}
-
+		*/
 		// 20% probability of generating new kolokwium on map
 		if (generator.nextInt(4) == 0) {
 			ArrayList<Kolokwium> kolokwia = Kolokwium.generate_list(1);
@@ -78,6 +80,15 @@ public class Main {
 			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
 				prowadzacy.changeSurowosc(25);
 			}
+		}
+		int i = 0;
+		while (true){
+			if(i>=Student.getList().size()){
+				break;
+			}
+			Student.getList().get(i).action();
+			Student.getList().get(i).checkStatus();
+			i++;
 		}
 	}
 
@@ -118,13 +129,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("Program zostal uruchomiony poprawnie\nTest rozmieszczenia obiektow:");
-		Plansza plansza = new Plansza(50, 100);
+		Plansza plansza = new Plansza(25, 25);
 
 		// random generation of actors
-		Student.setList(Student.generate_list(25));
-		Prowadzacy.setList(Prowadzacy.generate_list(5));
-		Kolokwium.setList(Kolokwium.generate_list(12));
-		Piwo.setList(Piwo.generate_list(12));
+		Student.setList(Student.generate_list(10));
+		Prowadzacy.setList(Prowadzacy.generate_list(0));
+		Kolokwium.setList(Kolokwium.generate_list(5));
+		Piwo.setList(Piwo.generate_list(5));
 
 		// random displacement of actors
 		Plansza.placeObjectsInRandomOrder(Student.getList());
@@ -135,9 +146,13 @@ public class Main {
 		for (Student student : Student.getList()) {
 			System.out.println(Arrays.toString(student.getCoordinates()));
 		}
-
+		visualization(plansza);
 		for (int i = 1; i <= LICZBA_DNI_SEMESTRU /* * LICZBA_SEMESTROW */; i++) {
 			wykonajCykl();
+			visualization(plansza);
+			System.out.println(Student.getList().size());
+			System.out.println(Kolokwium.getList().size());
+			System.out.println(Piwo.getList().size());
 		}
 		visualization(plansza);
 		System.out.println(Student.getList().size());

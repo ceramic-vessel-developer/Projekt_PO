@@ -111,7 +111,7 @@ public class Plansza {
 		int min = distances[0];
 		
 		for (int i = 1; i < obiekty.size(); i++) {
-			if (obiekty.get(i).getClass() != Postac.class || obiekty.get(i).getClass() != Prowadzacy.class) {
+			if (obiekty.get(i).getClass() != Student.class /*&& obiekty.get(i).getClass() != Prowadzacy.class*/) {
 				if (min > distances[i]) {
 					minIndex = i;
 					min = distances[i];

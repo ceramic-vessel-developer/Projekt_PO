@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Student extends Postac {
-	private static ArrayList<Student> list;
+	static ArrayList<Student> list;
 
 	private double szczescie;
 	private double inteligencja;
@@ -82,7 +82,7 @@ public class Student extends Postac {
 
 		for (int i = 0; i < ilosc; i++) {
 			list.add(new Student(generator.nextDouble() * 10, generator.nextDouble() * 10, generator.nextDouble() * 10,
-					generator.nextDouble() * 10, generator.nextDouble() * 10, "Jan", "Najemnik",
+					generator.nextDouble() * 100, generator.nextDouble() * 100, "Jan", "Najemnik",
 					generator.nextInt(20) + 10, 30));
 		}
 
@@ -155,7 +155,6 @@ public class Student extends Postac {
 	public void action() {
 		Random generator = new Random();
 
-
 		ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
 
 		if (obiekty.isEmpty()) {
@@ -180,6 +179,17 @@ public class Student extends Postac {
 			// run for your life
 			int []kor = obiekty.get(nearestObjectInfo[0]).getCoordinates();
 			this.runaway(kor[0],kor[1]);
+			return;
+		}else if (obiekty.get(nearestObjectInfo[0]).getClass().getName().equals("Student")){
+			for (int i = 0; i < 10; i++) {
+				int[] xy = {this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg()};
+
+				if (Plansza.getPole(xy[0], xy[1]) == null) {
+					this.move(xy[0], xy[1]);
+					break;
+				}
+			}
 			return;
 		}
 
