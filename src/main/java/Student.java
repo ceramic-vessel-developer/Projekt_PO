@@ -199,4 +199,10 @@ public class Student extends Postac {
 
 
 	}
+
+	public void checkStatus(){
+		if (this.ects<0 || this.zadowolenie<0){
+			list.remove(this);
+		}
+	}
 }
