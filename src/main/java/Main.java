@@ -105,16 +105,16 @@ public class Main {
 
 			for (int j = 0; j < Plansza.getSzerokosc(); j++) {
 				if(Plansza.getPole(i,j)!=null) {
-					String classname = Plansza.getPole(i, j).getClass().getName();
-
-					if(classname.equals("Student")){
+					Obiekt obiekt = Plansza.getPole(i, j);
+					if(obiekt instanceof Student) {
 						System.out.print('S');
-					}else if(classname.equals("Prowadzacy")){
+					} else if(obiekt instanceof Prowadzacy) {
 						System.out.print('P');
-					}else{
+					} else if(obiekt instanceof Przedmiot) {
+						System.out.print('p');
+					} else {
 						System.out.print('O');
 					}
-
 				}else{
 					System.out.print(' ');
 				}
