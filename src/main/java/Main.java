@@ -94,18 +94,18 @@ public class Main {
 
 	public static void visualization(Plansza plansza){
 
-		for (int i = 0; i < plansza.getSzerokosc()+2; i++) {
+		for (int i = 0; i < Plansza.getSzerokosc()+2; i++) {
 			System.out.print('-');
 		}
 
 		System.out.print('\n');
 
-		for (int i = 0; i < plansza.getDlugosc(); i++) {
+		for (int i = 0; i < Plansza.getDlugosc(); i++) {
 			System.out.print('|');
 
-			for (int j = 0; j < plansza.getSzerokosc(); j++) {
-				if(plansza.getPole(i,j)!=null) {
-					String classname = plansza.getPole(i, j).getClass().getName();
+			for (int j = 0; j < Plansza.getSzerokosc(); j++) {
+				if(Plansza.getPole(i,j)!=null) {
+					String classname = Plansza.getPole(i, j).getClass().getName();
 
 					if(classname.equals("Student")){
 						System.out.print('S');
@@ -121,7 +121,7 @@ public class Main {
 			}
 			System.out.print("|\n");
 		}
-		for (int i = 0; i < plansza.getSzerokosc()+2; i++) {
+		for (int i = 0; i < Plansza.getSzerokosc()+2; i++) {
 			System.out.print('-');
 		}
 		System.out.print('\n');
