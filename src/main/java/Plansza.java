@@ -92,26 +92,26 @@ public class Plansza {
 		int[] distances = new int[obiekty.size()];
 
 		int i = 0;
-		
+
 		for (Obiekt obiekt : obiekty) {
 			// math magic formula
 			int distance = (int) Math.sqrt(Math.pow(fromObiekt.x - obiekt.x, 2) + Math.pow(fromObiekt.y - obiekt.y, 2));
-			
+
 			distances[i] = distance;
 			i++;
 		}
 
 		return distances;
 	}
-	
+
 	public static int[] findNearestObject(ArrayList<Obiekt> obiekty, int[] distances) {
 		int[] objectInfo = new int[2];
-		
+
 		int minIndex = 0;
 		int min = distances[0];
-		
+
 		for (int i = 1; i < obiekty.size(); i++) {
-			if (obiekty.get(i).getClass() != Student.class /*&& obiekty.get(i).getClass() != Prowadzacy.class*/) {
+			if (obiekty.get(i).getClass() != Student.class /* && obiekty.get(i).getClass() != Prowadzacy.class */) {
 				if (min > distances[i]) {
 					minIndex = i;
 					min = distances[i];
@@ -121,7 +121,50 @@ public class Plansza {
 
 		objectInfo[0] = minIndex;
 		objectInfo[1] = min;
-		
+
 		return objectInfo;
+	}
+
+	public static void visualize() {
+		for (int i = 0; i < getSzerokosc() + 2; i++) {
+			System.out.print('-');
+		}
+	
+		System.out.print('\n');
+	
+		for (int i = 0; i < getDlugosc(); i++) {
+			System.out.print('|');
+	
+			for (int j = 0; j < getSzerokosc(); j++) {
+				if (getPole(i, j) != null) {
+					Obiekt obiekt = getPole(i, j);
+					
+					if (obiekt instanceof Student) {
+						System.out.print('@');
+					} else if (obiekt instanceof Prowadzacy) {
+						System.out.print('§');
+					} else if (obiekt instanceof Kolokwium) {
+						System.out.print('&');
+					} else if (obiekt instanceof Planszowka) {
+						System.out.print('#');
+					} else if (obiekt instanceof Piwo) {
+						System.out.print('U');
+					} else {
+						System.out.print('O');
+					}
+					
+				} else {
+					System.out.print(' ');
+				}
+			}
+			
+			System.out.print("|\n");
+		}
+		
+		for (int i = 0; i < getSzerokosc() + 2; i++) {
+			System.out.print('-');
+		}
+		
+		System.out.print('\n');
 	}
 }

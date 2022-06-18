@@ -44,7 +44,7 @@ public class Kolokwium extends NietrwalyPrzedmiot {
 		Random generator = new Random();
 
 		list.remove(this);
-
+		
 		int znak;
 
 		if (generator.nextInt(100) <= szczescie) {

@@ -32,42 +32,43 @@ public class Main {
 				break;
 			}
 		}
-		dzien+=1;
+		
+		dzien += 1;
 	}
 
 	public static void wykonajCykl() {
 		Random generator = new Random();
 
 		sprawdzDzien();
-		/*
+
 		// random daily event
-		for (Student student : Student.getList()) {
-			// 33% probability of being happier today
-			if (generator.nextInt(2) == 0) {
-				student.changeZadowolenie(generator.nextDouble() * 25);
-			}
-			// 25% probability of being more sad today
-			else if (generator.nextInt(3) == 0) {
-				student.changeZadowolenie(generator.nextDouble() * -15);
-			}
-		}
-		*/
+//		for (Student student : Student.getList()) {
+//			// 33% probability of being happier today
+//			if (generator.nextInt(2) == 0) {
+//				student.changeZadowolenie(generator.nextDouble() * 25);
+//			}
+//			// 25% probability of being more sad today
+//			else if (generator.nextInt(3) == 0) {
+//				student.changeZadowolenie(generator.nextDouble() * -15);
+//			}
+//		}
+
 		// 20% probability of generating new kolokwium on map
 		if (generator.nextInt(4) == 0) {
 			ArrayList<Kolokwium> kolokwia = Kolokwium.generate_list(1);
-			
+
 			Plansza.placeObjectsInRandomOrder(kolokwia);
 			Kolokwium.addToList(kolokwia);
 		}
-		
+
 		// 25% probability of generating new uzywka on map
 		if (generator.nextInt(3) == 0) {
 			ArrayList<Piwo> piwa = Piwo.generate_list(1);
-			
+
 			Plansza.placeObjectsInRandomOrder(piwa);
 			Piwo.addToList(piwa);
 		}
-		
+
 		// kolokwium event
 		if (typDnia == TypDnia.KOLOKWIUM) {
 			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
@@ -81,54 +82,16 @@ public class Main {
 				prowadzacy.changeSurowosc(25);
 			}
 		}
-		int i = 0;
-		while (true){
-			if(i>=Student.getList().size()){
-				break;
-			}
-			Student.getList().get(i).action();
-			Student.getList().get(i).checkStatus();
-			i++;
+		
+		for (Student student : Student.getList()) {
+			student.action();
+			student.checkStatus();
 		}
-	}
-
-	public static void visualization(Plansza plansza){
-
-		for (int i = 0; i < Plansza.getSzerokosc()+2; i++) {
-			System.out.print('-');
-		}
-
-		System.out.print('\n');
-
-		for (int i = 0; i < Plansza.getDlugosc(); i++) {
-			System.out.print('|');
-
-			for (int j = 0; j < Plansza.getSzerokosc(); j++) {
-				if(Plansza.getPole(i,j)!=null) {
-					Obiekt obiekt = Plansza.getPole(i, j);
-					if(obiekt instanceof Student) {
-						System.out.print('S');
-					} else if(obiekt instanceof Prowadzacy) {
-						System.out.print('P');
-					} else if(obiekt instanceof Przedmiot) {
-						System.out.print('p');
-					} else {
-						System.out.print('O');
-					}
-				}else{
-					System.out.print(' ');
-				}
-			}
-			System.out.print("|\n");
-		}
-		for (int i = 0; i < Plansza.getSzerokosc()+2; i++) {
-			System.out.print('-');
-		}
-		System.out.print('\n');
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Program zostal uruchomiony poprawnie\nTest rozmieszczenia obiektow:");
+		
 		Plansza plansza = new Plansza(25, 25);
 
 		// random generation of actors
@@ -146,15 +109,23 @@ public class Main {
 		for (Student student : Student.getList()) {
 			System.out.println(Arrays.toString(student.getCoordinates()));
 		}
-		visualization(plansza);
+		
+		
 		for (int i = 1; i <= LICZBA_DNI_SEMESTRU /* * LICZBA_SEMESTROW */; i++) {
+			System.out.println("Dzien: " + i);
+			
+			Plansza.visualize();
+			
+			System.out.println("Student: " + Student.getList().size());
+			System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
+			System.out.println("Kolokwium: " + Kolokwium.getList().size());
+			System.out.println("p: " + Piwo.getList().size());
+			
 			wykonajCykl();
-			visualization(plansza);
-			System.out.println(Student.getList().size());
-			System.out.println(Kolokwium.getList().size());
-			System.out.println(Piwo.getList().size());
 		}
-		visualization(plansza);
+		
+		Plansza.visualize();
+		
 		System.out.println(Student.getList().size());
 		System.out.println("Koniec dzialania programu");
 	}

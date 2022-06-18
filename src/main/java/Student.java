@@ -13,7 +13,7 @@ public class Student extends Postac {
 	private int ects;
 
 	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec,
-				   double zadowolenie, String imie, String nazwisko, int zasieg, int ects) {
+			double zadowolenie, String imie, String nazwisko, int zasieg, int ects) {
 		super(imie, nazwisko, zasieg);
 
 		this.szczescie = szczescie;
@@ -24,7 +24,7 @@ public class Student extends Postac {
 		this.setZadowolenie(zadowolenie);
 	}
 
-	public void changeEcts(int modEcts){
+	public void changeEcts(int modEcts) {
 		this.ects += modEcts;
 	}
 
@@ -89,66 +89,79 @@ public class Student extends Postac {
 		return list;
 	}
 
-	public void runaway(int x, int y){
-		boolean stop=false;
-		if (x>this.x && y>this.y){
+	public void runaway(int x, int y) {
+		boolean stop = false;
+		
+		if (x > this.x && y > this.y) {
 			for (int i = 0; i < this.zasieg; i++) {
-				if (stop){
+				if (stop) {
 					break;
 				}
-				for (int j = 0; j <this.zasieg ; j++) {
-					if (Plansza.getPole(this.x-zasieg+i,this.y-zasieg+j)==null && Plansza.isValidCoords(this.x-zasieg+i,this.y-zasieg+j)){
-						this.move(this.x-zasieg+i,this.y-zasieg+j);
-						stop=true;
-						break;
-					}
-				}
-
-			}
-
-		}else if (x<this.x && y>this.y){
-			for (int i = 0; i < this.zasieg; i++) {
-				if (stop){
-					break;
-				}
-				for (int j = 0; j <this.zasieg ; j++) {
-					if (Plansza.getPole(this.x+zasieg-i,this.y-zasieg+j)==null && Plansza.isValidCoords(this.x+zasieg-i,this.y-zasieg+j)){
-						this.move(this.x+zasieg-i,this.y-zasieg+j);
-						stop=true;
-						break;
-					}
-				}
-
-			}
-		}if (x>this.x && y<this.y){
-			for (int i = 0; i < this.zasieg; i++) {
-				if (stop){
-					break;
-				}
-				for (int j = 0; j <this.zasieg ; j++) {
-					if (Plansza.getPole(this.x-zasieg+i,this.y+zasieg-j)==null && Plansza.isValidCoords(this.x-zasieg+i,this.y+zasieg-j)){
-						this.move(this.x-zasieg+i,this.y+zasieg-j);
-						stop=true;
-						break;
-					}
-				}
-
-			}
-
-		}else if (x<this.x && y<this.y){
-			for (int i = 0; i < this.zasieg; i++) {
-				if (stop){
-					break;
-				}
-				for (int j = 0; j <this.zasieg ; j++) {
-					if (Plansza.getPole(this.x+zasieg-i,this.y+zasieg-j)==null && Plansza.isValidCoords(this.x+zasieg-i,this.y+zasieg-j)){
-						this.move(this.x+zasieg-i,this.y+zasieg-j);
-						stop=true;
+				
+				for (int j = 0; j < this.zasieg; j++) {
+					if (Plansza.getPole(this.x - zasieg + i, this.y - zasieg + j) == null
+							&& Plansza.isValidCoords(this.x - zasieg + i, this.y - zasieg + j)) {
+						this.move(this.x - zasieg + i, this.y - zasieg + j);
+						
+						stop = true;
+						
 						break;
 					}
 				}
 			}
-
+		} else if (x < this.x && y > this.y) {
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop) {
+					break;
+				}
+				
+				for (int j = 0; j < this.zasieg; j++) {
+					if (Plansza.getPole(this.x + zasieg - i, this.y - zasieg + j) == null
+							&& Plansza.isValidCoords(this.x + zasieg - i, this.y - zasieg + j)) {
+						this.move(this.x + zasieg - i, this.y - zasieg + j);
+						
+						stop = true;
+						
+						break;
+					}
+				}
+			}
+		}
+		
+		if (x > this.x && y < this.y) {
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop) {
+					break;
+				}
+				
+				for (int j = 0; j < this.zasieg; j++) {
+					if (Plansza.getPole(this.x - zasieg + i, this.y + zasieg - j) == null
+							&& Plansza.isValidCoords(this.x - zasieg + i, this.y + zasieg - j)) {
+						this.move(this.x - zasieg + i, this.y + zasieg - j);
+						
+						stop = true;
+						
+						break;
+					}
+				}
+			}
+		} else if (x < this.x && y < this.y) {
+			for (int i = 0; i < this.zasieg; i++) {
+				if (stop) {
+					break;
+				}
+				
+				for (int j = 0; j < this.zasieg; j++) {
+					if (Plansza.getPole(this.x + zasieg - i, this.y + zasieg - j) == null
+							&& Plansza.isValidCoords(this.x + zasieg - i, this.y + zasieg - j)) {
+						this.move(this.x + zasieg - i, this.y + zasieg - j);
+						
+						stop = true;
+						
+						break;
+					}
+				}
+			}
 		}
 	}
 
@@ -160,14 +173,16 @@ public class Student extends Postac {
 		if (obiekty.isEmpty()) {
 			// crawl like pathetic being in case of searching
 			for (int i = 0; i < 10; i++) {
-				int[] xy = {this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
-						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg()};
+				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
 
 				if (Plansza.getPole(xy[0], xy[1]) == null) {
 					this.move(xy[0], xy[1]);
+					
 					break;
 				}
 			}
+			
 			return;
 		}
 
@@ -175,43 +190,50 @@ public class Student extends Postac {
 
 		int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
 
-		if(obiekty.get(nearestObjectInfo[0]).getClass().getName().equals("Prowadzacy")){
+		Obiekt obiekt = obiekty.get(nearestObjectInfo[0]);
+		
+		
+		if (obiekt instanceof Prowadzacy) {
 			// run for your life
-			int []kor = obiekty.get(nearestObjectInfo[0]).getCoordinates();
-			this.runaway(kor[0],kor[1]);
+			int[] xy = obiekt.getCoordinates();
+			
+			this.runaway(xy[0], xy[1]);
+			
 			return;
-		}else if (obiekty.get(nearestObjectInfo[0]).getClass().getName().equals("Student")){
+		} else if (obiekt instanceof Student) {
 			for (int i = 0; i < 10; i++) {
-				int[] xy = {this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
-						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg()};
+				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
 
 				if (Plansza.getPole(xy[0], xy[1]) == null) {
 					this.move(xy[0], xy[1]);
+					
 					break;
 				}
 			}
+			
 			return;
 		}
 
-		this.focusedItem = (Przedmiot) obiekty.get(nearestObjectInfo[0]);
+		this.focusedItem = (Przedmiot) obiekt;
 
+		int[] coords = this.focusedItem.getCoordinates();
 
+		// teleport to the found object and use it
+		double[] modificators = this.focusedItem.use(szczescie, inteligencja, studenckosc);
 
-		int[] koordynaty = this.focusedItem.getCoordinates();
+		System.out.println("Student x: " + this.x + " y: " + this.y + " used " + obiekt.getClass().getName() + " x: " + coords[0] + " y: " + coords[1]);
 
-		// teleport to the found object, and use it
-		double[] mods=this.focusedItem.use(szczescie, inteligencja, studenckosc);
-		this.move(koordynaty[0],koordynaty[1]);
-		this.changePrzygotowanieDoZajec(mods[0]);
-		this.changeZadowolenie(mods[1]);
-
-
-
-
+		this.move(coords[0], coords[1]);
+		
+		this.changePrzygotowanieDoZajec(modificators[0]);
+		this.changeZadowolenie(modificators[1]);
 	}
 
-	public void checkStatus(){
-		if (this.ects<0 || this.zadowolenie<0){
+	public void checkStatus() {
+		if (this.ects < 0 || this.zadowolenie < 0) {
+			System.out.println("Student x: " + this.x + " y: " + this.y + " died");
+			
 			list.remove(this);
 		}
 	}
