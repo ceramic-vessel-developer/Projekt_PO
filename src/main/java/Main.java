@@ -32,7 +32,7 @@ public class Main {
 				break;
 			}
 		}
-		
+
 		dzien += 1;
 	}
 
@@ -82,21 +82,21 @@ public class Main {
 				prowadzacy.changeSurowosc(25);
 			}
 		}
-		
-		for (Student student : Student.getList()) {
-			student.action();
-			student.checkStatus();
+
+		for (int i = 0; i < Student.getList().size(); i++) {
+			Student.getList().get(i).action();
+			Student.getList().get(i).checkStatus();
 		}
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Program zostal uruchomiony poprawnie\nTest rozmieszczenia obiektow:");
-		
+		System.out.println("Program zostal uruchomiony poprawnie\n");
+
 		Plansza plansza = new Plansza(25, 25);
 
 		// random generation of actors
 		Student.setList(Student.generate_list(10));
-		Prowadzacy.setList(Prowadzacy.generate_list(0));
+		Prowadzacy.setList(Prowadzacy.generate_list(5));
 		Kolokwium.setList(Kolokwium.generate_list(5));
 		Piwo.setList(Piwo.generate_list(5));
 
@@ -106,29 +106,24 @@ public class Main {
 		Plansza.placeObjectsInRandomOrder(Kolokwium.getList());
 		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
-		for (Student student : Student.getList()) {
-			System.out.println(Arrays.toString(student.getCoordinates()));
-		}
-		
-		
 		for (int i = 1; i <= LICZBA_DNI_SEMESTRU /* * LICZBA_SEMESTROW */; i++) {
-			System.out.println("Dzien: " + i);
-			
+			System.out.println("\n\nDzien: " + i);
+
 			Plansza.visualize();
-			
+
 			System.out.println("Student: " + Student.getList().size());
 			System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
 			System.out.println("Kolokwium: " + Kolokwium.getList().size());
 			System.out.println("p: " + Piwo.getList().size());
-			
+
+			System.out.println("\nAt the end of the day");
+
 			wykonajCykl();
 		}
-		
+
 		Plansza.visualize();
-		
+
 		System.out.println(Student.getList().size());
 		System.out.println("Koniec dzialania programu");
 	}
-
 }
-//Obiekty są w listach przez referencje

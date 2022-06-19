@@ -69,13 +69,34 @@ public class Plansza {
 	public static ArrayList<Obiekt> searchMapWithinRange(int x, int y, int zasieg) {
 		ArrayList<Obiekt> obiekty = new ArrayList<Obiekt>();
 
-		for (int i = x; i < zasieg; i++) {
-			if (i >= dlugosc) {
-				continue;
-			}
+		int leftBorder = x - zasieg;
+		// rightBorder = x + zasieg
+		int widthLimit = zasieg * 2 + 1;
 
-			for (int j = y; j < zasieg; j++) {
-				if (j >= szerokosc) {
+		int topBorder = y - zasieg;
+		// bottomBorder = y + zasieg;
+		int heightLimit = zasieg * 2 + 1;
+
+		if (leftBorder < 0) {
+			leftBorder = 0;
+		}
+
+		if (leftBorder + widthLimit > Plansza.getDlugosc()) {
+			widthLimit = Plansza.getDlugosc() - x;
+		}
+
+		if (topBorder < 0) {
+			topBorder = 0;
+		}
+
+		if (topBorder + heightLimit > Plansza.getSzerokosc()) {
+			heightLimit = Plansza.getSzerokosc() - y;
+		}
+
+		for (int i = leftBorder; i < widthLimit; i++) {
+			for (int j = topBorder; j < heightLimit; j++) {
+				if (i == x && j == y) {
+					// ignore self
 					continue;
 				}
 
@@ -104,6 +125,11 @@ public class Plansza {
 		return distances;
 	}
 
+	/**
+	 * @param obiekty
+	 * @param distances
+	 * @return [index, distance]
+	 */
 	public static int[] findNearestObject(ArrayList<Obiekt> obiekty, int[] distances) {
 		int[] objectInfo = new int[2];
 
@@ -111,11 +137,9 @@ public class Plansza {
 		int min = distances[0];
 
 		for (int i = 1; i < obiekty.size(); i++) {
-			if (obiekty.get(i).getClass() != Student.class /* && obiekty.get(i).getClass() != Prowadzacy.class */) {
-				if (min > distances[i]) {
-					minIndex = i;
-					min = distances[i];
-				}
+			if (distances[i] < min) {
+				minIndex = i;
+				min = distances[i];
 			}
 		}
 
@@ -126,19 +150,19 @@ public class Plansza {
 	}
 
 	public static void visualize() {
-		for (int i = 0; i < getSzerokosc() + 2; i++) {
+		for (int i = 0; i < getDlugosc() + 2; i++) {
 			System.out.print('-');
 		}
-	
+
 		System.out.print('\n');
-	
-		for (int i = 0; i < getDlugosc(); i++) {
+
+		for (int i = 0; i < getSzerokosc(); i++) {
 			System.out.print('|');
-	
-			for (int j = 0; j < getSzerokosc(); j++) {
-				if (getPole(i, j) != null) {
-					Obiekt obiekt = getPole(i, j);
-					
+
+			for (int j = 0; j < getDlugosc(); j++) {
+				if (getPole(j, i) != null) {
+					Obiekt obiekt = getPole(j, i);
+
 					if (obiekt instanceof Student) {
 						System.out.print('@');
 					} else if (obiekt instanceof Prowadzacy) {
@@ -152,19 +176,19 @@ public class Plansza {
 					} else {
 						System.out.print('O');
 					}
-					
+
 				} else {
-					System.out.print(' ');
+					System.out.print('.');
 				}
 			}
-			
+
 			System.out.print("|\n");
 		}
-		
-		for (int i = 0; i < getSzerokosc() + 2; i++) {
+
+		for (int i = 0; i < getDlugosc() + 2; i++) {
 			System.out.print('-');
 		}
-		
+
 		System.out.print('\n');
 	}
 }

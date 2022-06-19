@@ -90,79 +90,89 @@ public class Student extends Postac {
 	}
 
 	public void runaway(int x, int y) {
+		int[] xy = new int[2];
+
 		boolean stop = false;
-		
+
 		if (x > this.x && y > this.y) {
 			for (int i = 0; i < this.zasieg; i++) {
+				for (int j = 0; j < this.zasieg; j++) {
+					xy[0] = this.x - zasieg + i;
+					xy[1] = this.y - zasieg + j;
+
+					if (Plansza.isValidCoords(xy[0], xy[1])) {
+						if (Plansza.getPole(xy[0], xy[1]) == null) {
+							stop = true;
+
+							break;
+						}
+					}
+				}
+
 				if (stop) {
 					break;
-				}
-				
-				for (int j = 0; j < this.zasieg; j++) {
-					if (Plansza.getPole(this.x - zasieg + i, this.y - zasieg + j) == null
-							&& Plansza.isValidCoords(this.x - zasieg + i, this.y - zasieg + j)) {
-						this.move(this.x - zasieg + i, this.y - zasieg + j);
-						
-						stop = true;
-						
-						break;
-					}
 				}
 			}
 		} else if (x < this.x && y > this.y) {
 			for (int i = 0; i < this.zasieg; i++) {
+				for (int j = 0; j < this.zasieg; j++) {
+					xy[0] = this.x + zasieg - i;
+					xy[1] = this.y - zasieg + j;
+
+					if (Plansza.isValidCoords(xy[0], xy[1])) {
+						if (Plansza.getPole(xy[0], xy[1]) == null) {
+							stop = true;
+
+							break;
+						}
+					}
+				}
+
 				if (stop) {
 					break;
-				}
-				
-				for (int j = 0; j < this.zasieg; j++) {
-					if (Plansza.getPole(this.x + zasieg - i, this.y - zasieg + j) == null
-							&& Plansza.isValidCoords(this.x + zasieg - i, this.y - zasieg + j)) {
-						this.move(this.x + zasieg - i, this.y - zasieg + j);
-						
-						stop = true;
-						
-						break;
-					}
 				}
 			}
-		}
-		
-		if (x > this.x && y < this.y) {
+		} else if (x > this.x && y < this.y) {
 			for (int i = 0; i < this.zasieg; i++) {
+				for (int j = 0; j < this.zasieg; j++) {
+					xy[0] = this.x - zasieg + i;
+					xy[1] = this.y + zasieg - j;
+
+					if (Plansza.isValidCoords(xy[0], xy[1])) {
+						if (Plansza.getPole(xy[0], xy[1]) == null) {
+							stop = true;
+
+							break;
+						}
+					}
+				}
+
 				if (stop) {
 					break;
-				}
-				
-				for (int j = 0; j < this.zasieg; j++) {
-					if (Plansza.getPole(this.x - zasieg + i, this.y + zasieg - j) == null
-							&& Plansza.isValidCoords(this.x - zasieg + i, this.y + zasieg - j)) {
-						this.move(this.x - zasieg + i, this.y + zasieg - j);
-						
-						stop = true;
-						
-						break;
-					}
 				}
 			}
 		} else if (x < this.x && y < this.y) {
 			for (int i = 0; i < this.zasieg; i++) {
+				for (int j = 0; j < this.zasieg; j++) {
+					xy[0] = this.x + zasieg - i;
+					xy[1] = this.y + zasieg - j;
+
+					if (Plansza.isValidCoords(xy[0], xy[1])) {
+						if (Plansza.getPole(xy[0], xy[1]) == null) {
+							stop = true;
+
+							break;
+						}
+					}
+				}
+
 				if (stop) {
 					break;
 				}
-				
-				for (int j = 0; j < this.zasieg; j++) {
-					if (Plansza.getPole(this.x + zasieg - i, this.y + zasieg - j) == null
-							&& Plansza.isValidCoords(this.x + zasieg - i, this.y + zasieg - j)) {
-						this.move(this.x + zasieg - i, this.y + zasieg - j);
-						
-						stop = true;
-						
-						break;
-					}
-				}
 			}
 		}
+
+		System.out.println("Student x: " + this.x + " y: " + this.y + " ran; new x: " + xy[0] + " y: " + xy[1]);
 	}
 
 	public void action() {
@@ -172,17 +182,22 @@ public class Student extends Postac {
 
 		if (obiekty.isEmpty()) {
 			// crawl like pathetic being in case of searching
-			for (int i = 0; i < 10; i++) {
+			while (true) {
 				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
 						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
 
-				if (Plansza.getPole(xy[0], xy[1]) == null) {
-					this.move(xy[0], xy[1]);
-					
-					break;
+				if (Plansza.isValidCoords(xy[0], xy[1])) {
+					if (Plansza.getPole(xy[0], xy[1]) == null) {
+						System.out.println("Student x: " + this.x + " y: " + this.y + " not found any object; new x: "
+								+ xy[0] + " y: " + xy[1]);
+
+						this.move(xy[0], xy[1]);
+
+						break;
+					}
 				}
 			}
-			
+
 			return;
 		}
 
@@ -191,41 +206,48 @@ public class Student extends Postac {
 		int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
 
 		Obiekt obiekt = obiekty.get(nearestObjectInfo[0]);
-		
-		
+
 		if (obiekt instanceof Prowadzacy) {
 			// run for your life
 			int[] xy = obiekt.getCoordinates();
-			
+			System.out.println(
+					"Student x: " + this.x + " y: " + this.y + " found prowadzacy on x: " + xy[0] + " y: " + xy[1]);
+
 			this.runaway(xy[0], xy[1]);
-			
+
 			return;
 		} else if (obiekt instanceof Student) {
-			for (int i = 0; i < 10; i++) {
+			while (true) {
 				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
 						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
 
-				if (Plansza.getPole(xy[0], xy[1]) == null) {
-					this.move(xy[0], xy[1]);
-					
-					break;
+				if (Plansza.isValidCoords(xy[0], xy[1])) {
+					if (Plansza.getPole(xy[0], xy[1]) == null) {
+						System.out.println("Student x: " + this.x + " y: " + this.y + " found student; new x: " + xy[0]
+								+ " y: " + xy[1]);
+
+						this.move(xy[0], xy[1]);
+
+						break;
+					}
 				}
 			}
-			
+
 			return;
 		}
 
-		this.focusedItem = (Przedmiot) obiekt;
+		Przedmiot focusedItem = (Przedmiot) obiekt;
 
-		int[] coords = this.focusedItem.getCoordinates();
+		int[] coords = focusedItem.getCoordinates();
 
 		// teleport to the found object and use it
-		double[] modificators = this.focusedItem.use(szczescie, inteligencja, studenckosc);
+		double[] modificators = focusedItem.use(szczescie, inteligencja, studenckosc);
 
-		System.out.println("Student x: " + this.x + " y: " + this.y + " used " + obiekt.getClass().getName() + " x: " + coords[0] + " y: " + coords[1]);
+		System.out.println("Student x: " + this.x + " y: " + this.y + " used " + obiekt.getClass().getName() + " x: "
+				+ coords[0] + " y: " + coords[1]);
 
 		this.move(coords[0], coords[1]);
-		
+
 		this.changePrzygotowanieDoZajec(modificators[0]);
 		this.changeZadowolenie(modificators[1]);
 	}
@@ -233,7 +255,7 @@ public class Student extends Postac {
 	public void checkStatus() {
 		if (this.ects < 0 || this.zadowolenie < 0) {
 			System.out.println("Student x: " + this.x + " y: " + this.y + " died");
-			
+
 			list.remove(this);
 		}
 	}
