@@ -172,6 +172,8 @@ public class Student extends Postac {
 			}
 		}
 
+		this.move(xy[0], xy[1]);
+		
 		System.out.println("Student x: " + this.x + " y: " + this.y + " ran; new x: " + xy[0] + " y: " + xy[1]);
 	}
 
