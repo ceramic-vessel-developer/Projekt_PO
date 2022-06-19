@@ -24,10 +24,6 @@ public class Student extends Postac {
 		this.setZadowolenie(zadowolenie);
 	}
 
-	public void changeEcts(int modEcts) {
-		this.ects += modEcts;
-	}
-
 	public static ArrayList<Student> getList() {
 		return list;
 	}
@@ -76,14 +72,26 @@ public class Student extends Postac {
 		this.zadowolenie += zadowolenie;
 	}
 
-	public static ArrayList<Student> generate_list(int ilosc) {
+	public int getEcts() {
+		return ects;
+	}
+
+	public void setEcts(int ects) {
+		this.ects = ects;
+	}
+
+	public void changeEcts(int ects) {
+		this.ects += ects;
+	}
+
+	public static ArrayList<Student> generate_list(int ilosc, int minimum) {
 		ArrayList<Student> list = new ArrayList<>();
 		Random generator = new Random();
 
 		for (int i = 0; i < ilosc; i++) {
-			list.add(new Student(generator.nextDouble() * 10, generator.nextDouble() * 10, generator.nextDouble() * 10,
-					generator.nextDouble() * 100, generator.nextDouble() * 100, "Jan", "Najemnik",
-					generator.nextInt(20) + 10, 30));
+			list.add(new Student(generator.nextDouble() * 10 + minimum, generator.nextDouble() * 10 + minimum, generator.nextDouble() * 10 + minimum,
+					generator.nextDouble() * 100 + minimum, generator.nextDouble() * 100 + minimum, "Jan", "Najemnik",
+					generator.nextInt(20) + 10 + minimum, 30));
 		}
 
 		return list;
@@ -94,12 +102,12 @@ public class Student extends Postac {
 
 		boolean stop = false;
 
-		if (x > this.x && y > this.y) {
-			for (int i = 0; i < this.zasieg; i++) {
-				for (int j = 0; j < this.zasieg; j++) {
+		if (x >= this.x && y >= this.y) {
+			for (int i = 0; i <= this.zasieg; i++) {
+				for (int j = 0; j <= this.zasieg; j++) {
 					xy[0] = this.x - zasieg + i;
 					xy[1] = this.y - zasieg + j;
-
+					
 					if (Plansza.isValidCoords(xy[0], xy[1])) {
 						if (Plansza.getPole(xy[0], xy[1]) == null) {
 							stop = true;
@@ -113,9 +121,9 @@ public class Student extends Postac {
 					break;
 				}
 			}
-		} else if (x < this.x && y > this.y) {
-			for (int i = 0; i < this.zasieg; i++) {
-				for (int j = 0; j < this.zasieg; j++) {
+		} else if (x <= this.x && y >= this.y) {
+			for (int i = 0; i <= this.zasieg; i++) {
+				for (int j = 0; j <= this.zasieg; j++) {
 					xy[0] = this.x + zasieg - i;
 					xy[1] = this.y - zasieg + j;
 
@@ -132,12 +140,12 @@ public class Student extends Postac {
 					break;
 				}
 			}
-		} else if (x > this.x && y < this.y) {
-			for (int i = 0; i < this.zasieg; i++) {
-				for (int j = 0; j < this.zasieg; j++) {
+		} else if (x >= this.x && y <= this.y) {
+			for (int i = 0; i <= this.zasieg; i++) {
+				for (int j = 0; j <= this.zasieg; j++) {
 					xy[0] = this.x - zasieg + i;
 					xy[1] = this.y + zasieg - j;
-
+					
 					if (Plansza.isValidCoords(xy[0], xy[1])) {
 						if (Plansza.getPole(xy[0], xy[1]) == null) {
 							stop = true;
@@ -151,12 +159,12 @@ public class Student extends Postac {
 					break;
 				}
 			}
-		} else if (x < this.x && y < this.y) {
-			for (int i = 0; i < this.zasieg; i++) {
-				for (int j = 0; j < this.zasieg; j++) {
+		} else if (x <= this.x && y <= this.y) {
+			for (int i = 0; i <= this.zasieg; i++) {
+				for (int j = 0; j <= this.zasieg; j++) {
 					xy[0] = this.x + zasieg - i;
 					xy[1] = this.y + zasieg - j;
-
+					
 					if (Plansza.isValidCoords(xy[0], xy[1])) {
 						if (Plansza.getPole(xy[0], xy[1]) == null) {
 							stop = true;
@@ -171,10 +179,15 @@ public class Student extends Postac {
 				}
 			}
 		}
-
-		this.move(xy[0], xy[1]);
 		
+		if (!Plansza.isValidCoords(xy[0], xy[1])) {
+			xy[0] = this.x;
+			xy[1] = this.y;
+		}
+
 		System.out.println("Student x: " + this.x + " y: " + this.y + " ran; new x: " + xy[0] + " y: " + xy[1]);
+		
+		this.move(xy[0], xy[1]);
 	}
 
 	public void action() {
@@ -257,6 +270,8 @@ public class Student extends Postac {
 	public void checkStatus() {
 		if (this.ects < 0 || this.zadowolenie < 0) {
 			System.out.println("Student x: " + this.x + " y: " + this.y + " died");
+
+			Plansza.setPole(this.x, this.y, null);
 
 			list.remove(this);
 		}

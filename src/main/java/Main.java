@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 	public final static int LICZBA_SEMESTROW = 6;
@@ -87,15 +88,39 @@ public class Main {
 			Student.getList().get(i).action();
 			Student.getList().get(i).checkStatus();
 		}
+
+		for (int i = 0; i < Prowadzacy.getList().size(); i++) {
+			Prowadzacy.getList().get(i).action();
+		}
+		
+
+		// kolokwium event
+		if (typDnia == TypDnia.KOLOKWIUM) {
+			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
+				prowadzacy.changeSurowosc(-15);
+			}
+		}
+
+		// sesja event
+		if (typDnia == TypDnia.SESJA) {
+			for (Prowadzacy prowadzacy : Prowadzacy.getList()) {
+				prowadzacy.changeSurowosc(-25);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Program zostal uruchomiony poprawnie\n");
-
+		Scanner scan = new Scanner(System.in);
+		
 		Plansza plansza = new Plansza(25, 25);
+		
+		System.out.println("Podaj minimalna wartosc cech: ");
 
+
+		int minimum = 3;//scan.nextInt();
+		
 		// random generation of actors
-		Student.setList(Student.generate_list(10));
+		Student.setList(Student.generate_list(10, minimum));
 		Prowadzacy.setList(Prowadzacy.generate_list(5));
 		Kolokwium.setList(Kolokwium.generate_list(5));
 		Piwo.setList(Piwo.generate_list(5));

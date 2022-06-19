@@ -5,10 +5,10 @@ public class Prowadzacy extends Postac {
 	private static ArrayList<Prowadzacy> list;
 
 	private Tytul stopien;
-	private int surowosc;
-	private int szacunek;
+	private double surowosc;
+	private double szacunek;
 
-	public Prowadzacy(Tytul stopien, int surowosc, int szacunek, String imie, String nazwisko, int zasieg) {
+	public Prowadzacy(Tytul stopien, double surowosc, double szacunek, String imie, String nazwisko, int zasieg) {
 		super(imie, nazwisko, zasieg);
 
 		this.setStopien(stopien);
@@ -23,7 +23,7 @@ public class Prowadzacy extends Postac {
 	public static void setList(ArrayList<Prowadzacy> list) {
 		Prowadzacy.list = list;
 	}
-	
+
 	public static void addToList(ArrayList<Prowadzacy> list) {
 		Prowadzacy.list.addAll(list);
 	}
@@ -36,23 +36,23 @@ public class Prowadzacy extends Postac {
 		this.stopien = stopien;
 	}
 
-	public int getSurowosc() {
+	public double getSurowosc() {
 		return surowosc;
 	}
 
-	public void setSurowosc(int surowosc) {
+	public void setSurowosc(double surowosc) {
 		this.surowosc = surowosc;
 	}
 
-	public void changeSurowosc(int surowosc) {
+	public void changeSurowosc(double surowosc) {
 		this.surowosc += surowosc;
 	}
 
-	public int getSzacunek() {
+	public double getSzacunek() {
 		return szacunek;
 	}
 
-	public void setSzacunek(int szacunek) {
+	public void setSzacunek(double szacunek) {
 		this.szacunek = szacunek;
 	}
 
@@ -61,10 +61,80 @@ public class Prowadzacy extends Postac {
 		Random generator = new Random();
 
 		for (int i = 0; i < ilosc; i++) {
-			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextInt() * 10, generator.nextInt() * 10, "Damian",
+			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextDouble() * 100, generator.nextDouble() * 100, "Damian",
 					"Mrozo", generator.nextInt(15) + 7));
 		}
 
 		return list;
+	}
+
+	public void action() {
+		Random generator = new Random();
+		
+		ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
+
+		if (obiekty.isEmpty()) {
+			// crawl like pathetic being in case of searching
+			while (true) {
+				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
+
+				if (Plansza.isValidCoords(xy[0], xy[1])) {
+					if (Plansza.getPole(xy[0], xy[1]) == null) {
+						System.out.println("Prowadzacy x: " + this.x + " y: " + this.y
+								+ " not found any object; new x: " + xy[0] + " y: " + xy[1]);
+
+						this.move(xy[0], xy[1]);
+
+						break;
+					}
+				}
+			}
+
+			return;
+		}
+
+		int[] odleglosci = Plansza.calculateDistances(this, obiekty);
+
+		int[] nearestObjectInfo = Plansza.findNearestObject(obiekty, odleglosci);
+
+		Obiekt obiekt = obiekty.get(nearestObjectInfo[0]);
+
+		if (obiekt instanceof Student) {
+			Student student = (Student) obiekt;
+
+			int[] coords = student.getCoordinates();
+
+			int ects = 0;
+			double zadowolenie = 0;
+
+			if (student.getPrzygotowanieDoZajec() < this.surowosc) {
+				if (this.stopien == Tytul.INZYNIER || this.stopien == Tytul.MAGISTER_INZ) {
+					ects = -1;
+				} else if (this.stopien == Tytul.DOKTOR || this.stopien == Tytul.DOKTOR_HAB) {
+					ects = -2;
+				} else if (this.stopien == Tytul.PROFESOR) {
+					ects = -3;
+				}
+				
+				zadowolenie = -(this.szacunek - student.getSzczescie()) * 0.5;
+			} else {
+				zadowolenie = this.szacunek * 0.3;
+			}
+
+			student.changeEcts(ects);
+			student.changeZadowolenie(zadowolenie);
+
+			System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student " + " x: " + coords[0]
+					+ " y: " + coords[1]);
+
+			System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects + " zadowolenie: "
+					+ zadowolenie);
+			
+			System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts() + " zadowolenie: "
+					+ student.getZadowolenie());
+			
+			return;
+		}
 	}
 }
