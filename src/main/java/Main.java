@@ -1,7 +1,12 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import com.opencsv.CSVWriter;
+
 
 public class Main {
 	public final static int LICZBA_SEMESTROW = 6;
@@ -36,6 +41,33 @@ public class Main {
 
 		dzien += 1;
 	}
+
+	public static void writeData(String filePath, String[] data)
+	{
+		File file = new File(filePath);
+		try {
+			FileWriter outputfile = new FileWriter(file,true);
+
+
+			CSVWriter writer = new CSVWriter(outputfile);
+
+
+//			String[] header = { "Dzien", "Liczba studentow" };
+//			writer.writeNext(header);
+
+
+
+			writer.writeNext(data);
+
+
+			writer.close();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	public static void wykonajCykl() {
 		Random generator = new Random();
@@ -140,6 +172,8 @@ public class Main {
 			System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
 			System.out.println("Kolokwium: " + Kolokwium.getList().size());
 			System.out.println("p: " + Piwo.getList().size());
+
+			writeData("lol.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()) });
 
 			System.out.println("\nAt the end of the day");
 
