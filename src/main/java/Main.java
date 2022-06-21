@@ -130,9 +130,12 @@ public class Main {
 		
 		System.out.println("Podaj poczatkowa ilosc kolokwiow: ");
 		int kolokwiaCount = scan.nextInt();
-		
+
 		System.out.println("Podaj poczatkowa ilosc piw: ");
 		int piwaCount = scan.nextInt();
+		
+		System.out.println("Podaj ilosc semestrow: ");
+		int semestrCount = scan.nextInt();
 
 		Plansza plansza = new Plansza(dlugosc, szerokosc);
 		
@@ -148,7 +151,7 @@ public class Main {
 		Plansza.placeObjectsInRandomOrder(Kolokwium.getList());
 		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
-		for (int i = 1; i <= LICZBA_DNI_SEMESTRU /* * LICZBA_SEMESTROW */; i++) {
+		for (int i = 1; i <= LICZBA_DNI_SEMESTRU * semestrCount; i++) {
 			System.out.println("\n\nDzien: " + i);
 
 			Plansza.visualize();
