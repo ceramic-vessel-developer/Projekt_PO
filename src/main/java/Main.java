@@ -144,18 +144,38 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		
-		Plansza plansza = new Plansza(25, 25);
+
+		System.out.println("Podaj dlugosc planszy: ");
+		int dlugosc = scan.nextInt();
+		
+		System.out.println("Podaj szerokosc planszy: ");
+		int szerokosc = scan.nextInt();
 		
 		System.out.println("Podaj minimalna wartosc cech: ");
+		int minimum = scan.nextInt();
+		
+		System.out.println("Podaj poczatkowa ilosc studentow: ");
+		int studenciCount = scan.nextInt();
+		
+		System.out.println("Podaj poczatkowa ilosc prowadzacych: ");
+		int prowadzacyCount = scan.nextInt();
+		
+		System.out.println("Podaj poczatkowa ilosc kolokwiow: ");
+		int kolokwiaCount = scan.nextInt();
 
+		System.out.println("Podaj poczatkowa ilosc piw: ");
+		int piwaCount = scan.nextInt();
+		
+		System.out.println("Podaj ilosc semestrow: ");
+		int semestrCount = scan.nextInt();
 
-		int minimum = 3;//scan.nextInt();
+		Plansza plansza = new Plansza(dlugosc, szerokosc);
 		
 		// random generation of actors
-		Student.setList(Student.generate_list(10, minimum));
-		Prowadzacy.setList(Prowadzacy.generate_list(5));
-		Kolokwium.setList(Kolokwium.generate_list(5));
-		Piwo.setList(Piwo.generate_list(5));
+		Student.setList(Student.generate_list(studenciCount, minimum));
+		Prowadzacy.setList(Prowadzacy.generate_list(prowadzacyCount));
+		Kolokwium.setList(Kolokwium.generate_list(kolokwiaCount));
+		Piwo.setList(Piwo.generate_list(piwaCount));
 
 		// random displacement of actors
 		Plansza.placeObjectsInRandomOrder(Student.getList());
@@ -163,7 +183,7 @@ public class Main {
 		Plansza.placeObjectsInRandomOrder(Kolokwium.getList());
 		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
-		for (int i = 1; i <= LICZBA_DNI_SEMESTRU /* * LICZBA_SEMESTROW */; i++) {
+		for (int i = 1; i <= LICZBA_DNI_SEMESTRU * semestrCount; i++) {
 			System.out.println("\n\nDzien: " + i);
 
 			Plansza.visualize();
