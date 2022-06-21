@@ -99,87 +99,102 @@ public class Student extends Postac {
 
 	public void runaway(int x, int y) {
 		int[] xy = new int[2];
+		Random generator = new Random();
 
 		boolean stop = false;
+		if ((this.x==0 && this.y==0)||(this.x==0 && this.y==Plansza.getSzerokosc())||(this.x==Plansza.getDlugosc() && this.y==0)||(this.x==Plansza.getDlugosc() && this.y==Plansza.getSzerokosc())) {
 
-		if (x >= this.x && y >= this.y) {
-			for (int i = 0; i <= this.zasieg; i++) {
-				for (int j = 0; j <= this.zasieg; j++) {
-					xy[0] = this.x - zasieg + i;
-					xy[1] = this.y - zasieg + j;
-					
-					if (Plansza.isValidCoords(xy[0], xy[1])) {
-						if (Plansza.getPole(xy[0], xy[1]) == null) {
-							stop = true;
+			while (true) {
+				xy[0] = this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg();
+				xy[1] = this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg();
 
-							break;
-						}
+				if (Plansza.isValidCoords(xy[0], xy[1])) {
+					if (Plansza.getPole(xy[0], xy[1]) == null) {
+
+						break;
+
 					}
-				}
-
-				if (stop) {
-					break;
 				}
 			}
-		} else if (x <= this.x && y >= this.y) {
-			for (int i = 0; i <= this.zasieg; i++) {
-				for (int j = 0; j <= this.zasieg; j++) {
-					xy[0] = this.x + zasieg - i;
-					xy[1] = this.y - zasieg + j;
+		}else {
+			if (x >= this.x && y >= this.y) {
+				for (int i = 0; i <= this.zasieg; i++) {
+					for (int j = 0; j <= this.zasieg; j++) {
+						xy[0] = this.x - zasieg + i;
+						xy[1] = this.y - zasieg + j;
 
-					if (Plansza.isValidCoords(xy[0], xy[1])) {
-						if (Plansza.getPole(xy[0], xy[1]) == null) {
-							stop = true;
+						if (Plansza.isValidCoords(xy[0], xy[1])) {
+							if (Plansza.getPole(xy[0], xy[1]) == null) {
+								stop = true;
 
-							break;
+								break;
+							}
 						}
 					}
-				}
 
-				if (stop) {
-					break;
-				}
-			}
-		} else if (x >= this.x && y <= this.y) {
-			for (int i = 0; i <= this.zasieg; i++) {
-				for (int j = 0; j <= this.zasieg; j++) {
-					xy[0] = this.x - zasieg + i;
-					xy[1] = this.y + zasieg - j;
-					
-					if (Plansza.isValidCoords(xy[0], xy[1])) {
-						if (Plansza.getPole(xy[0], xy[1]) == null) {
-							stop = true;
-
-							break;
-						}
+					if (stop) {
+						break;
 					}
 				}
+			} else if (x <= this.x && y >= this.y) {
+				for (int i = 0; i <= this.zasieg; i++) {
+					for (int j = 0; j <= this.zasieg; j++) {
+						xy[0] = this.x + zasieg - i;
+						xy[1] = this.y - zasieg + j;
 
-				if (stop) {
-					break;
-				}
-			}
-		} else if (x <= this.x && y <= this.y) {
-			for (int i = 0; i <= this.zasieg; i++) {
-				for (int j = 0; j <= this.zasieg; j++) {
-					xy[0] = this.x + zasieg - i;
-					xy[1] = this.y + zasieg - j;
-					
-					if (Plansza.isValidCoords(xy[0], xy[1])) {
-						if (Plansza.getPole(xy[0], xy[1]) == null) {
-							stop = true;
+						if (Plansza.isValidCoords(xy[0], xy[1])) {
+							if (Plansza.getPole(xy[0], xy[1]) == null) {
+								stop = true;
 
-							break;
+								break;
+							}
 						}
 					}
-				}
 
-				if (stop) {
-					break;
+					if (stop) {
+						break;
+					}
+				}
+			} else if (x >= this.x && y <= this.y) {
+				for (int i = 0; i <= this.zasieg; i++) {
+					for (int j = 0; j <= this.zasieg; j++) {
+						xy[0] = this.x - zasieg + i;
+						xy[1] = this.y + zasieg - j;
+
+						if (Plansza.isValidCoords(xy[0], xy[1])) {
+							if (Plansza.getPole(xy[0], xy[1]) == null) {
+								stop = true;
+
+								break;
+							}
+						}
+					}
+
+					if (stop) {
+						break;
+					}
+				}
+			} else if (x <= this.x && y <= this.y) {
+				for (int i = 0; i <= this.zasieg; i++) {
+					for (int j = 0; j <= this.zasieg; j++) {
+						xy[0] = this.x + zasieg - i;
+						xy[1] = this.y + zasieg - j;
+
+						if (Plansza.isValidCoords(xy[0], xy[1])) {
+							if (Plansza.getPole(xy[0], xy[1]) == null) {
+								stop = true;
+
+								break;
+							}
+						}
+					}
+
+					if (stop) {
+						break;
+					}
 				}
 			}
 		}
-		
 		if (!Plansza.isValidCoords(xy[0], xy[1])) {
 			xy[0] = this.x;
 			xy[1] = this.y;

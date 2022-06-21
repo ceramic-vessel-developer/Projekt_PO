@@ -166,7 +166,7 @@ public class Plansza {
 					if (obiekt instanceof Student) {
 						System.out.print('@');
 					} else if (obiekt instanceof Prowadzacy) {
-						System.out.print('§');
+						System.out.print("§");
 					} else if (obiekt instanceof Kolokwium) {
 						System.out.print('&');
 					} else if (obiekt instanceof Planszowka) {
