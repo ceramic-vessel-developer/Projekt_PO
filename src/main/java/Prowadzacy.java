@@ -102,39 +102,94 @@ public class Prowadzacy extends Postac {
 
 		if (obiekt instanceof Student) {
 			Student student = (Student) obiekt;
-
 			int[] coords = student.getCoordinates();
+			boolean moved = false;
 
-			int ects = 0;
-			double zadowolenie = 0;
+			if ((Plansza.isValidCoords(coords[0]-1,coords[1]-1) && Plansza.getPole(coords[0]-1,coords[1]-1)==null)){
 
-			if (student.getPrzygotowanieDoZajec() < this.surowosc) {
-				if (this.stopien == Tytul.INZYNIER || this.stopien == Tytul.MAGISTER_INZ) {
-					ects = -1;
-				} else if (this.stopien == Tytul.DOKTOR || this.stopien == Tytul.DOKTOR_HAB) {
-					ects = -2;
-				} else if (this.stopien == Tytul.PROFESOR) {
-					ects = -3;
-				}
-				
-				zadowolenie = -(this.szacunek - student.getSzczescie()) * 0.5;
-			} else {
-				zadowolenie = this.szacunek * 0.3;
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+						+ (coords[0]-1) + " y: " + (coords[1]-1));
+				this.move(coords[0]-1,coords[1]-1);
+				moved = true;
+
+			}else if ((Plansza.isValidCoords(coords[0]+1,coords[1]-1) && Plansza.getPole(coords[0]+1,coords[1]-1)==null)){
+
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+						+ (coords[0]+1) + " y: " + (coords[1]-1));
+				this.move(coords[0]+1,coords[1]-1);
+				moved = true;
+
+
+			}else if ((Plansza.isValidCoords(coords[0]-1,coords[1]+1) && Plansza.getPole(coords[0]-1,coords[1]+1)==null)){
+
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+						+ (coords[0]-1) + " y: " + (coords[1]+1));
+				this.move(coords[0]-1,coords[1]+1);
+				moved = true;
+
+
+			}else if ((Plansza.isValidCoords(coords[0]+1,coords[1]+1)&& Plansza.getPole(coords[0]+1,coords[1]+1)==null)){
+
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+						+ (coords[0]+1) + " y: " + (coords[1]+1));
+				this.move(coords[0]+1,coords[1]+1);
+				moved = true;
+
 			}
 
-			student.changeEcts(ects);
-			student.changeZadowolenie(zadowolenie);
+			if(moved) {
 
-			System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student " + " x: " + coords[0]
-					+ " y: " + coords[1]);
+				int ects = 0;
+				double zadowolenie;
 
-			System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects + " zadowolenie: "
-					+ zadowolenie);
-			
-			System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts() + " zadowolenie: "
-					+ student.getZadowolenie());
-			
-			return;
+				if (student.getPrzygotowanieDoZajec() < this.surowosc) {
+					if (this.stopien == Tytul.INZYNIER || this.stopien == Tytul.MAGISTER_INZ) {
+						ects = -1;
+					} else if (this.stopien == Tytul.DOKTOR || this.stopien == Tytul.DOKTOR_HAB) {
+						ects = -2;
+					} else if (this.stopien == Tytul.PROFESOR) {
+						ects = -3;
+					}
+
+					zadowolenie = -(this.szacunek - student.getSzczescie()) * 0.5;
+				} else {
+					zadowolenie = this.szacunek * 0.3;
+				}
+
+				student.changeEcts(ects);
+				student.changeZadowolenie(zadowolenie);
+
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student " + " x: " + coords[0]
+						+ " y: " + coords[1]);
+
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects + " zadowolenie: "
+						+ zadowolenie);
+
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts() + " zadowolenie: "
+						+ student.getZadowolenie());
+
+				return;
+			}
+		}else{
+
+			// crawl like pathetic being in case of searching
+			while (true) {
+				int[] xy = { this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg(),
+						this.y + generator.nextInt(this.getZasieg() * 2) - this.getZasieg() };
+
+				if (Plansza.isValidCoords(xy[0], xy[1])) {
+					if (Plansza.getPole(xy[0], xy[1]) == null) {
+						System.out.println("Prowadzacy x: " + this.x + " y: " + this.y
+								+ " not found any student; new x: " + xy[0] + " y: " + xy[1]);
+
+						this.move(xy[0], xy[1]);
+
+						break;
+					}
+				}
+			}
+
+
 		}
 	}
 }
