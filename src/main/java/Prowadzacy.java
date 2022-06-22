@@ -177,9 +177,11 @@ public class Prowadzacy extends Postac {
 
 				if (Plansza.isValidCoords(xy[0], xy[1])) {
 					if (Plansza.getPole(xy[0], xy[1]) == null) {
-						System.out.println("Prowadzacy x: " + this.x + " y: " + this.y
-								+ " not found any object; new x: " + xy[0] + " y: " + xy[1]);
 
+						if (Main.EXTRA_LOGS) {
+							System.out.println("Prowadzacy x: " + this.x + " y: " + this.y
+									+ " not found any object; new x: " + xy[0] + " y: " + xy[1]);
+						}
 						this.move(xy[0], xy[1]);
 
 						break;
@@ -204,32 +206,42 @@ public class Prowadzacy extends Postac {
 			if ((Plansza.isValidCoords(coords[0] - 1, coords[1] - 1)
 					&& Plansza.getPole(coords[0] - 1, coords[1] - 1) == null)) {
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0] - 1) + " y: " + (coords[1] - 1));
+				if (Main.EXTRA_LOGS) {
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+							+ (coords[0] - 1) + " y: " + (coords[1] - 1));
+				}
+
 				this.move(coords[0] - 1, coords[1] - 1);
 				moved = true;
 
 			} else if ((Plansza.isValidCoords(coords[0] + 1, coords[1] - 1)
 					&& Plansza.getPole(coords[0] + 1, coords[1] - 1) == null)) {
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0] + 1) + " y: " + (coords[1] - 1));
+				if (Main.EXTRA_LOGS) {
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+							+ (coords[0] + 1) + " y: " + (coords[1] - 1));
+				}
+
 				this.move(coords[0] + 1, coords[1] - 1);
 				moved = true;
 
 			} else if ((Plansza.isValidCoords(coords[0] - 1, coords[1] + 1)
 					&& Plansza.getPole(coords[0] - 1, coords[1] + 1) == null)) {
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0] - 1) + " y: " + (coords[1] + 1));
+				if (Main.EXTRA_LOGS) {
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+							+ (coords[0] - 1) + " y: " + (coords[1] + 1));
+				}
 				this.move(coords[0] - 1, coords[1] + 1);
 				moved = true;
 
 			} else if ((Plansza.isValidCoords(coords[0] + 1, coords[1] + 1)
 					&& Plansza.getPole(coords[0] + 1, coords[1] + 1) == null)) {
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0] + 1) + " y: " + (coords[1] + 1));
+				if (Main.EXTRA_LOGS) {
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
+							+ (coords[0] + 1) + " y: " + (coords[1] + 1));
+				}
 				this.move(coords[0] + 1, coords[1] + 1);
 				moved = true;
 
@@ -257,14 +269,16 @@ public class Prowadzacy extends Postac {
 				student.changeEcts(ects);
 				student.changeZadowolenie(zadowolenie);
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student " + " x: " + coords[0]
-						+ " y: " + coords[1]);
+				if (Main.EXTRA_LOGS) {
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student " + " x: " + coords[0]
+							+ " y: " + coords[1]);
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects
-						+ " zadowolenie: " + zadowolenie);
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects
+							+ " zadowolenie: " + zadowolenie);
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts()
-						+ " zadowolenie: " + student.getZadowolenie());
+					System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts()
+							+ " zadowolenie: " + student.getZadowolenie());
+				}
 
 				return;
 			}
@@ -277,8 +291,10 @@ public class Prowadzacy extends Postac {
 
 				if (Plansza.isValidCoords(xy[0], xy[1])) {
 					if (Plansza.getPole(xy[0], xy[1]) == null) {
-						System.out.println("Prowadzacy x: " + this.x + " y: " + this.y
-								+ " not found any student; new x: " + xy[0] + " y: " + xy[1]);
+						if (Main.EXTRA_LOGS) {
+							System.out.println("Prowadzacy x: " + this.x + " y: " + this.y
+									+ " not found any student; new x: " + xy[0] + " y: " + xy[1]);
+						}
 
 						this.move(xy[0], xy[1]);
 

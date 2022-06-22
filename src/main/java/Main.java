@@ -12,6 +12,14 @@ import com.opencsv.CSVWriter;
  */
 public class Main {
 	/**
+	 * Wlaczanie dodatkowych logów
+	 */
+	public final static boolean EXTRA_LOGS=false;
+	/**
+	 * Wlaczanie wizualizacji
+	 */
+	public final static boolean VISUALISATION=true;
+	/**
 	 * Liczba semestrow
 	 */
 	public final static int LICZBA_SEMESTROW = 6;
@@ -182,38 +190,56 @@ public class Main {
 	 * 
 	 * @param args nieuzywane
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Scanner scan = new Scanner(System.in);
+		int dlugosc,szerokosc,minimum,studenciCount,prowadzacyCount,kolokwiaCount,materialyCount,piwaCount,planszowkiCount,semestrCount;
 
-		System.out.println("Podaj dlugosc planszy: ");
-		int dlugosc = scan.nextInt();
+		System.out.println("Wybierz tryb pracy\n1-wprowadz wlasne dane\n2-uzyj domyslnych danych ");
+		int input = scan.nextInt();
+		if (input==1) {
 
-		System.out.println("Podaj szerokosc planszy: ");
-		int szerokosc = scan.nextInt();
+			System.out.println("Podaj dlugosc planszy: ");
+			dlugosc = scan.nextInt();
 
-		System.out.println("Podaj minimalna wartosc cech: ");
-		int minimum = scan.nextInt();
+			System.out.println("Podaj szerokosc planszy: ");
+			szerokosc = scan.nextInt();
 
-		System.out.println("Podaj poczatkowa ilosc studentow: ");
-		int studenciCount = scan.nextInt();
+			System.out.println("Podaj minimalna wartosc cech: ");
+			minimum = scan.nextInt();
 
-		System.out.println("Podaj poczatkowa ilosc prowadzacych: ");
-		int prowadzacyCount = scan.nextInt();
+			System.out.println("Podaj poczatkowa ilosc studentow: ");
+			studenciCount = scan.nextInt();
 
-		System.out.println("Podaj poczatkowa ilosc kolokwiow: ");
-		int kolokwiaCount = scan.nextInt();
+			System.out.println("Podaj poczatkowa ilosc prowadzacych: ");
+			prowadzacyCount = scan.nextInt();
 
-		System.out.println("Podaj poczatkowa ilosc materialow: ");
-		int materialyCount = scan.nextInt();
+			System.out.println("Podaj poczatkowa ilosc kolokwiow: ");
+			kolokwiaCount = scan.nextInt();
 
-		System.out.println("Podaj poczatkowa ilosc planszowek: ");
-		int planszowkiCount = scan.nextInt();
+			System.out.println("Podaj poczatkowa ilosc materialow: ");
+			materialyCount = scan.nextInt();
 
-		System.out.println("Podaj poczatkowa ilosc piw: ");
-		int piwaCount = scan.nextInt();
+			System.out.println("Podaj poczatkowa ilosc planszowek: ");
+			planszowkiCount = scan.nextInt();
 
-		System.out.println("Podaj ilosc semestrow: ");
-		int semestrCount = scan.nextInt();
+			System.out.println("Podaj poczatkowa ilosc piw: ");
+			piwaCount = scan.nextInt();
+
+			System.out.println("Podaj ilosc semestrow: ");
+			semestrCount = scan.nextInt();
+		}else {
+			dlugosc = 25;
+			szerokosc = 25;
+			minimum = 5;
+			studenciCount = 25;
+			prowadzacyCount = 10;
+			kolokwiaCount = 10;
+			materialyCount = 10;
+			planszowkiCount = 10;
+			piwaCount = 10;
+			semestrCount = 3;
+
+		}
 
 		Plansza plansza = new Plansza(dlugosc, szerokosc);
 
@@ -236,22 +262,27 @@ public class Main {
 		for (int j = 1; j < semestrCount+1; j++) {
 			for (int i = 1; i <= LICZBA_DNI_SEMESTRU; i++) {
 				System.out.println("\n\nSemestr: " + j + " Dzien: " + i);
+				if (VISUALISATION) {
+					Plansza.visualize();
+					Thread.sleep(400);
+				}
 
-				Plansza.visualize();
-
-				System.out.println("Student: " + Student.getList().size());
-				System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
-				System.out.println("Kolokwium: " + Kolokwium.getList().size());
-				System.out.println("Materialy: " + Materialy.getList().size());
-				System.out.println("Planszowka: " + Planszowka.getList().size());
-				System.out.println("p: " + Piwo.getList().size());
+				if(EXTRA_LOGS) {
+					System.out.println("Student: " + Student.getList().size());
+					System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
+					System.out.println("Kolokwium: " + Kolokwium.getList().size());
+					System.out.println("Materialy: " + Materialy.getList().size());
+					System.out.println("Planszowka: " + Planszowka.getList().size());
+					System.out.println("p: " + Piwo.getList().size());
+					System.out.println("\nAt the end of the day");
+				}
 
 				writeData("data.csv",
 						new String[] { String.valueOf(i+((j-1)*100)), String.valueOf(Student.getList().size()),
 								String.valueOf(Kolokwium.getList().size()), String.valueOf(Materialy.getList().size()),
 								String.valueOf(Planszowka.getList().size()), String.valueOf(Piwo.getList().size()) });
 
-				System.out.println("\nAt the end of the day");
+
 
 				wykonajCykl();
 			}
@@ -259,7 +290,6 @@ public class Main {
 
 		Plansza.visualize();
 
-		System.out.println(Student.getList().size());
 		System.out.println("Koniec dzialania programu");
 	}
 }

@@ -330,9 +330,9 @@ public class Student extends Postac {
 			xy[0] = this.x;
 			xy[1] = this.y;
 		}
-
-		System.out.println("Student x: " + this.x + " y: " + this.y + " ran; new x: " + xy[0] + " y: " + xy[1]);
-
+		if (Main.EXTRA_LOGS) {
+			System.out.println("Student x: " + this.x + " y: " + this.y + " ran; new x: " + xy[0] + " y: " + xy[1]);
+		}
 		this.move(xy[0], xy[1]);
 	}
 
@@ -358,8 +358,11 @@ public class Student extends Postac {
 
 				if (Plansza.isValidCoords(xy[0], xy[1])) {
 					if (Plansza.getPole(xy[0], xy[1]) == null) {
-						System.out.println("Student x: " + this.x + " y: " + this.y + " not found any object; new x: "
-								+ xy[0] + " y: " + xy[1]);
+
+						if (Main.EXTRA_LOGS) {
+							System.out.println("Student x: " + this.x + " y: " + this.y + " not found any object; new x: "
+									+ xy[0] + " y: " + xy[1]);
+						}
 
 						this.move(xy[0], xy[1]);
 
@@ -380,9 +383,10 @@ public class Student extends Postac {
 		if (obiekt instanceof Prowadzacy) {
 			// run for your life
 			int[] xy = obiekt.getCoordinates();
-			System.out.println(
-					"Student x: " + this.x + " y: " + this.y + " found prowadzacy on x: " + xy[0] + " y: " + xy[1]);
-
+			if (Main.EXTRA_LOGS) {
+				System.out.println(
+						"Student x: " + this.x + " y: " + this.y + " found prowadzacy on x: " + xy[0] + " y: " + xy[1]);
+			}
 			this.runaway(xy[0], xy[1]);
 
 			return;
@@ -393,9 +397,10 @@ public class Student extends Postac {
 
 				if (Plansza.isValidCoords(xy[0], xy[1])) {
 					if (Plansza.getPole(xy[0], xy[1]) == null) {
-						System.out.println("Student x: " + this.x + " y: " + this.y + " found student; new x: " + xy[0]
-								+ " y: " + xy[1]);
-
+						if (Main.EXTRA_LOGS) {
+							System.out.println("Student x: " + this.x + " y: " + this.y + " found student; new x: " + xy[0]
+									+ " y: " + xy[1]);
+						}
 						this.move(xy[0], xy[1]);
 
 						break;
@@ -413,9 +418,10 @@ public class Student extends Postac {
 		// teleport to the found object and use it
 		double[] modificators = focusedItem.use(szczescie, inteligencja, studenckosc);
 
-		System.out.println("Student x: " + this.x + " y: " + this.y + " used " + obiekt.getClass().getName() + " x: "
-				+ coords[0] + " y: " + coords[1]);
-
+		if (Main.EXTRA_LOGS) {
+			System.out.println("Student x: " + this.x + " y: " + this.y + " used " + obiekt.getClass().getName() + " x: "
+					+ coords[0] + " y: " + coords[1]);
+		}
 		this.move(coords[0], coords[1]);
 
 		this.changePrzygotowanieDoZajec(modificators[0]);
@@ -428,8 +434,9 @@ public class Student extends Postac {
 	 */
 	public void checkStatus() {
 		if (this.ects < 0 || this.zadowolenie < 0) {
-			System.out.println("Student x: " + this.x + " y: " + this.y + " died");
-
+			if (Main.EXTRA_LOGS) {
+				System.out.println("Student x: " + this.x + " y: " + this.y + " died");
+			}
 			Plansza.setPole(this.x, this.y, null);
 
 			list.remove(this);

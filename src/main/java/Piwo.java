@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Klasa przedmiotu znikającego po czasie, który daje bonus do cech studenta
+ * Klasa przedmiotu znikajacego po czasie, ktory daje bonus do cech studenta
  * 
  * @see NietrwalyPrzedmiot
  */
 public class Piwo extends NietrwalyPrzedmiot {
 	/**
-	 * Lista przedmiotów znajdujacych sie na planszy
+	 * Lista przedmiotow znajdujacych sie na planszy
 	 */
 	private static ArrayList<Piwo> list;
 
@@ -77,7 +77,7 @@ public class Piwo extends NietrwalyPrzedmiot {
 	public static void wykonajCykl() {
 		for (Piwo piwo : list) {
 			piwo.cycleLifetime();
-			;
+
 		}
 	}
 

@@ -1,5 +1,5 @@
 /**
- * Klasa abstrakcyjna przedmiotu znikającego po czasie, który daje bonus do cech
+ * Klasa abstrakcyjna przedmiotu znikającego po czasie, ktory daje bonus do cech
  * studenta. Dziedziczy po klasie Przedmiot
  * 
  * @see Przedmiot

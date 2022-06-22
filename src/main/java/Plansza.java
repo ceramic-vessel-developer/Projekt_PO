@@ -220,6 +220,7 @@ public class Plansza {
 	 * Wizualizuje plansze
 	 */
 	public static void visualize() {
+		System.out.println("@-student	§-prowadzacy	&-kolokwium\n#-planszowka	M-materialy	U-piwo");
 		for (int i = 0; i < getDlugosc() + 2; i++) {
 			System.out.print('-');
 		}

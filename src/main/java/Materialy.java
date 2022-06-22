@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Klasa przedmiotu, który daje bonus do cech studenta
+ * Klasa przedmiotu, ktory daje bonus do cech studenta
  * 
  * @see Przedmiot
  */
 public class Materialy extends Przedmiot {
 	/**
-	 * Lista przedmiotów znajdujacych sie na planszy
+	 * Lista przedmiotow znajdujacych sie na planszy
 	 */
 	private static ArrayList<Materialy> list;
 
