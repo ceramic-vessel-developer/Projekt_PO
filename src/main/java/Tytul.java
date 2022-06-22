@@ -5,9 +5,13 @@ import java.util.Random;
 
 /**
  * Stopien naukowy prowadzacego
+ * 
  * @see Prowadzacy
  */
 public enum Tytul {
+	/**
+	 * Tytuly prowadzacych
+	 */
 	INZYNIER, MAGISTER_INZ, DOKTOR, DOKTOR_HAB, PROFESOR;
 
 	private static final List<Tytul> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
@@ -16,6 +20,7 @@ public enum Tytul {
 
 	/**
 	 * Losowo generuje tytul dla prowadzacego
+	 * 
 	 * @return losowy tytul prowadzacego
 	 */
 	public static Tytul randomTytul() {

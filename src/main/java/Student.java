@@ -203,6 +203,7 @@ public class Student extends Postac {
 	 * Generuje liste postaci o losowych wskaznikach
 	 * 
 	 * @param ilosc ilosc postaci do wygenerowania
+	 * @param minimum minimalny zakres modyfikatorow
 	 * @return lista postaci
 	 */
 	public static ArrayList<Student> generate_list(int ilosc, int minimum) {
