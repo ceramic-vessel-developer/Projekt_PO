@@ -11,16 +11,46 @@ import com.opencsv.CSVWriter;
  * Klasa glowna symulacji
  */
 public class Main {
+	/**
+	 * Liczba semestrow
+	 */
 	public final static int LICZBA_SEMESTROW = 6;
+	/**
+	 * Liczba dni w semestrze
+	 */
 	public final static int LICZBA_DNI_SEMESTRU = 100;
+	/**
+	 * Liczba dni sesji
+	 */
 	public final static int LICZBA_DNI_SESJI = 20;
+	/**
+	 * Liczba kolokwiow w semestrze
+	 */
 	public final static int LICZBA_KOLOKWIOW = 4;
+	/**
+	 * Dzien poczatku sesji
+	 */
 	public final static int DZIEN_SESJI = LICZBA_DNI_SEMESTRU - LICZBA_DNI_SESJI + 1;
 
+	/**
+	 * Rodzaj dnia symulacji
+	 * 
+	 * @see TypDnia
+	 */
 	public static TypDnia typDnia = TypDnia.ZWYKLY;
 
+	/**
+	 * Aktualny semestr
+	 */
 	public static int semestr = 1;
+	/**
+	 * Aktualny dzien
+	 */
 	public static int dzien = 1;
+
+	/**
+	 * Numer przyszlego kolokwium
+	 */
 	public static int kolokwium = 1;
 
 	/**
@@ -149,6 +179,7 @@ public class Main {
 
 	/**
 	 * Metoda glowna
+	 * 
 	 * @param args nieuzywane
 	 */
 	public static void main(String[] args) {
