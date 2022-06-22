@@ -1,11 +1,32 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Klasa planszy zawierajacej wszystkie obiekty takie jak postaci oraz
+ * przedmioty
+ * 
+ * @see Obiekt
+ */
 public class Plansza {
+	/**
+	 * Plansza jako tablica obiektow
+	 */
 	private static Obiekt[][] plansza;
+	/**
+	 * Dlugosc planszy
+	 */
 	private static int dlugosc;
+	/**
+	 * Szerokosc planszy
+	 */
 	private static int szerokosc;
 
+	/**
+	 * Konstruktor planszy
+	 * 
+	 * @param dlugosc   dlugosc planszy
+	 * @param szerokosc szerokosc planszy
+	 */
 	public Plansza(int dlugosc, int szerokosc) {
 		plansza = new Obiekt[dlugosc][szerokosc];
 
@@ -13,6 +34,12 @@ public class Plansza {
 		Plansza.szerokosc = szerokosc;
 	}
 
+	/**
+	 * Getter dla pola na planszys
+	 * @param x wspolrzedna x pola
+	 * @param y wspolrzedna y pola
+	 * @return obiekt znajdujacy sie na planszy
+	 */
 	public static Obiekt getPole(int x, int y) {
 		if (!isValidCoords(x, y)) {
 			return null;
@@ -21,6 +48,13 @@ public class Plansza {
 		return plansza[x][y];
 	}
 
+	/**
+	 * Setter dla pola na planszy
+	 * @param <T> dowolny obiekt dziedziczacy po klasie Obiekt
+	 * @param x wspolrzedna x
+	 * @param y wspolrzedna y
+	 * @param obiekt dowolny obiekt dziedziczacy po klasie Obiekt
+	 */
 	public static <T> void setPole(int x, int y, T obiekt) {
 		if (!isValidCoords(x, y)) {
 			return;
@@ -29,14 +63,28 @@ public class Plansza {
 		plansza[x][y] = (Obiekt) obiekt;
 	}
 
+	/**
+	 * Getter dla dlugosc
+	 * @return dlugosc dlugosc
+	 */
 	public static int getDlugosc() {
 		return dlugosc;
 	}
 
+	/**
+	 * Getter dla szerokosc
+	 * @return szerokosc szerokosc
+	 */
 	public static int getSzerokosc() {
 		return szerokosc;
 	}
 
+	/**
+	 * Sprawdza czy podane wspolrzedne sa poprawne
+	 * @param x wspolrzedna x
+	 * @param y wspolrzedna y
+	 * @return true jesli wspolrzedne sa poprawne, false jesli nie
+	 */
 	public static Boolean isValidCoords(int x, int y) {
 		if ((x < 0) || (x >= dlugosc) || (y < 0) || (y >= szerokosc)) {
 			return false;
@@ -45,6 +93,11 @@ public class Plansza {
 		return true;
 	}
 
+	/**
+	 * Ustawia obiekty losowy po planszy
+	 * @param <T> dowolna klasa dziedziczaca po klasie Obiekt
+	 * @param list lista obiektow
+	 */
 	public static <T> void placeObjectsInRandomOrder(ArrayList<T> list) {
 		Random generator = new Random();
 
@@ -66,6 +119,13 @@ public class Plansza {
 		}
 	}
 
+	/**
+	 * Przeszukuje mape wokol danego pola
+	 * @param x wspolrzedna x
+	 * @param y wspolrzedna y
+	 * @param zasieg zasieg wzroku
+	 * @return lista obiektow w zasiegu wzroku
+	 */
 	public static ArrayList<Obiekt> searchMapWithinRange(int x, int y, int zasieg) {
 		ArrayList<Obiekt> obiekty = new ArrayList<Obiekt>();
 
@@ -109,6 +169,12 @@ public class Plansza {
 		return obiekty;
 	}
 
+	/**
+	 * Oblicza odleglosci obiektow od danego obiektu
+	 * @param fromObiekt obiekt zrodlowy
+	 * @param obiekty obiekty od ktorych obliczyc odleglosc
+	 * @return tablica odleglosci
+	 */
 	public static int[] calculateDistances(Obiekt fromObiekt, ArrayList<Obiekt> obiekty) {
 		int[] distances = new int[obiekty.size()];
 
@@ -126,8 +192,9 @@ public class Plansza {
 	}
 
 	/**
-	 * @param obiekty
-	 * @param distances
+	 * Znajduje najblizszy obiekt
+	 * @param obiekty obiekty
+	 * @param distances odleglosci
 	 * @return [index, distance]
 	 */
 	public static int[] findNearestObject(ArrayList<Obiekt> obiekty, int[] distances) {
@@ -149,6 +216,9 @@ public class Plansza {
 		return objectInfo;
 	}
 
+	/**
+	 * Wizualizuje plansze
+	 */
 	public static void visualize() {
 		for (int i = 0; i < getDlugosc() + 2; i++) {
 			System.out.print('-');
