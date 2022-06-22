@@ -203,7 +203,7 @@ public class Main {
 			System.out.println("Planszowka: " + Planszowka.getList().size());
 			System.out.println("p: " + Piwo.getList().size());
 
-			writeData("lol3.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()) });
+			writeData("data.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()),String.valueOf(Kolokwium.getList().size()),String.valueOf(Materialy.getList().size()),String.valueOf(Planszowka.getList().size()),String.valueOf(Piwo.getList().size()) });
 
 			System.out.println("\nAt the end of the day");
 
