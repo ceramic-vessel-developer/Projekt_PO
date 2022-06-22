@@ -1,20 +1,8 @@
 abstract class Postac extends Obiekt {
-	protected String imie;
-	protected String nazwisko;
 	protected int zasieg;
 
-	protected Postac(String imie, String nazwisko, int zasieg) {
-		this.imie = imie;
-		this.nazwisko = nazwisko;
+	protected Postac(int zasieg) {
 		this.zasieg = zasieg;
-	}
-
-	public String getImie() {
-		return this.imie;
-	}
-
-	public String getNazwisko() {
-		return this.nazwisko;
 	}
 
 	public int getZasieg() {

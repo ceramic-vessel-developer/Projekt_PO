@@ -13,8 +13,8 @@ public class Student extends Postac {
 	private int ects;
 
 	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec,
-			double zadowolenie, String imie, String nazwisko, int zasieg, int ects) {
-		super(imie, nazwisko, zasieg);
+			double zadowolenie, int zasieg, int ects) {
+		super(zasieg);
 
 		this.szczescie = szczescie;
 		this.inteligencja = inteligencja;
@@ -89,9 +89,9 @@ public class Student extends Postac {
 		Random generator = new Random();
 
 		for (int i = 0; i < ilosc; i++) {
-			list.add(new Student(generator.nextDouble() * 10 + minimum, generator.nextDouble() * 10 + minimum, generator.nextDouble() * 10 + minimum,
-					generator.nextDouble() * 100 + minimum, generator.nextDouble() * 100 + minimum, "Jan", "Najemnik",
-					generator.nextInt(20) + 10 + minimum, 30));
+			list.add(new Student(generator.nextDouble() * 10 + minimum, generator.nextDouble() * 10 + minimum,
+					generator.nextDouble() * 10 + minimum, generator.nextDouble() * 100 + minimum,
+					generator.nextDouble() * 100 + minimum, generator.nextInt(20) + 10 + minimum, 30));
 		}
 
 		return list;
@@ -102,7 +102,9 @@ public class Student extends Postac {
 		Random generator = new Random();
 
 		boolean stop = false;
-		if ((this.x==0 && this.y==0)||(this.x==0 && this.y==Plansza.getSzerokosc())||(this.x==Plansza.getDlugosc() && this.y==0)||(this.x==Plansza.getDlugosc() && this.y==Plansza.getSzerokosc())) {
+		if ((this.x == 0 && this.y == 0) || (this.x == 0 && this.y == Plansza.getSzerokosc())
+				|| (this.x == Plansza.getDlugosc() && this.y == 0)
+				|| (this.x == Plansza.getDlugosc() && this.y == Plansza.getSzerokosc())) {
 
 			while (true) {
 				xy[0] = this.x + generator.nextInt(this.getZasieg() * 2) - this.getZasieg();
@@ -116,7 +118,7 @@ public class Student extends Postac {
 					}
 				}
 			}
-		}else {
+		} else {
 			if (x >= this.x && y >= this.y) {
 				for (int i = 0; i <= this.zasieg; i++) {
 					for (int j = 0; j <= this.zasieg; j++) {
@@ -201,7 +203,7 @@ public class Student extends Postac {
 		}
 
 		System.out.println("Student x: " + this.x + " y: " + this.y + " ran; new x: " + xy[0] + " y: " + xy[1]);
-		
+
 		this.move(xy[0], xy[1]);
 	}
 

@@ -8,8 +8,8 @@ public class Prowadzacy extends Postac {
 	private double surowosc;
 	private double szacunek;
 
-	public Prowadzacy(Tytul stopien, double surowosc, double szacunek, String imie, String nazwisko, int zasieg) {
-		super(imie, nazwisko, zasieg);
+	public Prowadzacy(Tytul stopien, double surowosc, double szacunek, int zasieg) {
+		super(zasieg);
 
 		this.setStopien(stopien);
 		this.setSurowosc(surowosc);
@@ -61,8 +61,8 @@ public class Prowadzacy extends Postac {
 		Random generator = new Random();
 
 		for (int i = 0; i < ilosc; i++) {
-			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextDouble() * 100, generator.nextDouble() * 100, "Damian",
-					"Mrozo", generator.nextInt(15) + 7));
+			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextDouble() * 100, generator.nextDouble() * 100,
+					generator.nextInt(15) + 7));
 		}
 
 		return list;
@@ -70,7 +70,7 @@ public class Prowadzacy extends Postac {
 
 	public void action() {
 		Random generator = new Random();
-		
+
 		ArrayList<Obiekt> obiekty = Plansza.searchMapWithinRange(this.x, this.y, this.getZasieg());
 
 		if (obiekty.isEmpty()) {
@@ -105,39 +105,41 @@ public class Prowadzacy extends Postac {
 			int[] coords = student.getCoordinates();
 			boolean moved = false;
 
-			if ((Plansza.isValidCoords(coords[0]-1,coords[1]-1) && Plansza.getPole(coords[0]-1,coords[1]-1)==null)){
+			if ((Plansza.isValidCoords(coords[0] - 1, coords[1] - 1)
+					&& Plansza.getPole(coords[0] - 1, coords[1] - 1) == null)) {
 
 				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0]-1) + " y: " + (coords[1]-1));
-				this.move(coords[0]-1,coords[1]-1);
+						+ (coords[0] - 1) + " y: " + (coords[1] - 1));
+				this.move(coords[0] - 1, coords[1] - 1);
 				moved = true;
 
-			}else if ((Plansza.isValidCoords(coords[0]+1,coords[1]-1) && Plansza.getPole(coords[0]+1,coords[1]-1)==null)){
+			} else if ((Plansza.isValidCoords(coords[0] + 1, coords[1] - 1)
+					&& Plansza.getPole(coords[0] + 1, coords[1] - 1) == null)) {
 
 				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0]+1) + " y: " + (coords[1]-1));
-				this.move(coords[0]+1,coords[1]-1);
+						+ (coords[0] + 1) + " y: " + (coords[1] - 1));
+				this.move(coords[0] + 1, coords[1] - 1);
 				moved = true;
 
-
-			}else if ((Plansza.isValidCoords(coords[0]-1,coords[1]+1) && Plansza.getPole(coords[0]-1,coords[1]+1)==null)){
+			} else if ((Plansza.isValidCoords(coords[0] - 1, coords[1] + 1)
+					&& Plansza.getPole(coords[0] - 1, coords[1] + 1) == null)) {
 
 				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0]-1) + " y: " + (coords[1]+1));
-				this.move(coords[0]-1,coords[1]+1);
+						+ (coords[0] - 1) + " y: " + (coords[1] + 1));
+				this.move(coords[0] - 1, coords[1] + 1);
 				moved = true;
 
-
-			}else if ((Plansza.isValidCoords(coords[0]+1,coords[1]+1)&& Plansza.getPole(coords[0]+1,coords[1]+1)==null)){
+			} else if ((Plansza.isValidCoords(coords[0] + 1, coords[1] + 1)
+					&& Plansza.getPole(coords[0] + 1, coords[1] + 1) == null)) {
 
 				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student; new x: "
-						+ (coords[0]+1) + " y: " + (coords[1]+1));
-				this.move(coords[0]+1,coords[1]+1);
+						+ (coords[0] + 1) + " y: " + (coords[1] + 1));
+				this.move(coords[0] + 1, coords[1] + 1);
 				moved = true;
 
 			}
 
-			if(moved) {
+			if (moved) {
 
 				int ects = 0;
 				double zadowolenie;
@@ -162,15 +164,15 @@ public class Prowadzacy extends Postac {
 				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + " found student " + " x: " + coords[0]
 						+ " y: " + coords[1]);
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects + " zadowolenie: "
-						+ zadowolenie);
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; change ects: " + ects
+						+ " zadowolenie: " + zadowolenie);
 
-				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts() + " zadowolenie: "
-						+ student.getZadowolenie());
+				System.out.println("Prowadzacy x: " + this.x + " y: " + this.y + "; student ects: " + student.getEcts()
+						+ " zadowolenie: " + student.getZadowolenie());
 
 				return;
 			}
-		}else{
+		} else {
 
 			// crawl like pathetic being in case of searching
 			while (true) {
@@ -188,7 +190,6 @@ public class Prowadzacy extends Postac {
 					}
 				}
 			}
-
 
 		}
 	}
