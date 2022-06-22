@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Klasa przedmiotu znikającego po czasie, który daje bonus do cech studenta
+ * Klasa przedmiotu znikajacego po czasie, ktory daje bonus do cech studenta
  * 
  * @see NietrwalyPrzedmiot
  */
