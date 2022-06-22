@@ -7,7 +7,9 @@ import java.util.Random;
 import java.util.Scanner;
 import com.opencsv.CSVWriter;
 
-
+/**
+ * Klasa glowna symulacji
+ */
 public class Main {
 	public final static int LICZBA_SEMESTROW = 6;
 	public final static int LICZBA_DNI_SEMESTRU = 100;
@@ -21,6 +23,9 @@ public class Main {
 	public static int dzien = 1;
 	public static int kolokwium = 1;
 
+	/**
+	 * Sprawdza rodzaj dnia symulacji
+	 */
 	public static void sprawdzDzien() {
 		typDnia = TypDnia.ZWYKLY;
 
@@ -191,23 +196,25 @@ public class Main {
 		Plansza.placeObjectsInRandomOrder(Planszowka.getList());
 		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
-		for (int i = 1; i <= LICZBA_DNI_SEMESTRU * semestrCount; i++) {
-			System.out.println("\n\nDzien: " + i);
+		for (int j = 1; j < semestrCount; j++) {
+			for (int i = 1; i <= LICZBA_DNI_SEMESTRU; i++) {
+				System.out.println("\n\nSemestr: " + j + " Dzien: " + i);
 
-			Plansza.visualize();
+				Plansza.visualize();
 
-			System.out.println("Student: " + Student.getList().size());
-			System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
-			System.out.println("Kolokwium: " + Kolokwium.getList().size());
-			System.out.println("Materialy: " + Materialy.getList().size());
-			System.out.println("Planszowka: " + Planszowka.getList().size());
-			System.out.println("p: " + Piwo.getList().size());
+				System.out.println("Student: " + Student.getList().size());
+				System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
+				System.out.println("Kolokwium: " + Kolokwium.getList().size());
+				System.out.println("Materialy: " + Materialy.getList().size());
+				System.out.println("Planszowka: " + Planszowka.getList().size());
+				System.out.println("p: " + Piwo.getList().size());
 
-			writeData("data.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()),String.valueOf(Kolokwium.getList().size()),String.valueOf(Materialy.getList().size()),String.valueOf(Planszowka.getList().size()),String.valueOf(Piwo.getList().size()) });
+				writeData("data.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()),String.valueOf(Kolokwium.getList().size()),String.valueOf(Materialy.getList().size()),String.valueOf(Planszowka.getList().size()),String.valueOf(Piwo.getList().size()) });
 
-			System.out.println("\nAt the end of the day");
+				System.out.println("\nAt the end of the day");
 
-			wykonajCykl();
+				wykonajCykl();
+			}
 		}
 
 		Plansza.visualize();
