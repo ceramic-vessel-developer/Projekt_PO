@@ -61,7 +61,7 @@ public class Prowadzacy extends Postac {
 		Random generator = new Random();
 
 		for (int i = 0; i < ilosc; i++) {
-			list.add(new Prowadzacy(Tytul.DOKTOR_HAB, generator.nextDouble() * 100, generator.nextDouble() * 100,
+			list.add(new Prowadzacy(Tytul.randomTytul(), generator.nextDouble() * 100, generator.nextDouble() * 100,
 					generator.nextInt(15) + 7));
 		}
 
