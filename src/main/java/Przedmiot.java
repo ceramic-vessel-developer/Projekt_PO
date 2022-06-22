@@ -44,7 +44,7 @@ abstract class Przedmiot extends Obiekt {
 	/**
 	 * Setter dla modyfikatora do przygotowania
 	 * 
-	 * @param modDoZadowolenia modyfikator do przygotowania
+	 * @param modDoPrzygotowania modyfikator do przygotowania
 	 */
 	public void setModDoPrzygotowania(int modDoPrzygotowania) {
 		this.modDoPrzygotowania = modDoPrzygotowania;
