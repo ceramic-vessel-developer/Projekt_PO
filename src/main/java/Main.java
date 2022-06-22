@@ -233,7 +233,7 @@ public class Main {
 		Plansza.placeObjectsInRandomOrder(Planszowka.getList());
 		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
-		for (int j = 1; j < semestrCount; j++) {
+		for (int j = 1; j < semestrCount+1; j++) {
 			for (int i = 1; i <= LICZBA_DNI_SEMESTRU; i++) {
 				System.out.println("\n\nSemestr: " + j + " Dzien: " + i);
 
@@ -247,7 +247,7 @@ public class Main {
 				System.out.println("p: " + Piwo.getList().size());
 
 				writeData("data.csv",
-						new String[] { String.valueOf(i), String.valueOf(Student.getList().size()),
+						new String[] { String.valueOf(i+((j-1)*100)), String.valueOf(Student.getList().size()),
 								String.valueOf(Kolokwium.getList().size()), String.valueOf(Materialy.getList().size()),
 								String.valueOf(Planszowka.getList().size()), String.valueOf(Piwo.getList().size()) });
 
