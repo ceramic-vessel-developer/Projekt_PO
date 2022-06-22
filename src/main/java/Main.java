@@ -47,31 +47,35 @@ public class Main {
 		dzien += 1;
 	}
 
+	/**
+	 * Zapisuje dane symulacji do pliku csv
+	 * 
+	 * @param filePath sciezka do pliku
+	 * @param data     dane do zapisania
+	 */
 	public static void writeData(String filePath, String[] data) {
 		File file = new File(filePath);
 		try {
-			FileWriter outputfile = new FileWriter(file,true);
-
+			FileWriter outputfile = new FileWriter(file, true);
 
 			CSVWriter writer = new CSVWriter(outputfile);
-
 
 //			String[] header = { "Dzien", "Liczba studentow" };
 //			writer.writeNext(header);
 
-
-
-			writer.writeNext(data,false);
-
+			writer.writeNext(data, false);
 
 			writer.close();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-
+	/**
+	 * Wykonuje pojedynczy cykl symulacji zaczynajac od sprawdzenia dnia,
+	 * wylosowania nowych obiektow na planszy i wykonania zdarzen odpowiednich dla
+	 * danego typu dnia.
+	 */
 	public static void wykonajCykl() {
 		Random generator = new Random();
 
@@ -127,7 +131,6 @@ public class Main {
 		for (int i = 0; i < Prowadzacy.getList().size(); i++) {
 			Prowadzacy.getList().get(i).action();
 		}
-		
 
 		// kolokwium event
 		if (typDnia == TypDnia.KOLOKWIUM) {
@@ -144,42 +147,45 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Metoda glowna
+	 * @param args nieuzywane
+	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		
 
 		System.out.println("Podaj dlugosc planszy: ");
 		int dlugosc = scan.nextInt();
-		
+
 		System.out.println("Podaj szerokosc planszy: ");
 		int szerokosc = scan.nextInt();
-		
+
 		System.out.println("Podaj minimalna wartosc cech: ");
 		int minimum = scan.nextInt();
-		
+
 		System.out.println("Podaj poczatkowa ilosc studentow: ");
 		int studenciCount = scan.nextInt();
-		
+
 		System.out.println("Podaj poczatkowa ilosc prowadzacych: ");
 		int prowadzacyCount = scan.nextInt();
 
 		System.out.println("Podaj poczatkowa ilosc kolokwiow: ");
 		int kolokwiaCount = scan.nextInt();
-		
+
 		System.out.println("Podaj poczatkowa ilosc materialow: ");
 		int materialyCount = scan.nextInt();
-		
+
 		System.out.println("Podaj poczatkowa ilosc planszowek: ");
 		int planszowkiCount = scan.nextInt();
 
 		System.out.println("Podaj poczatkowa ilosc piw: ");
 		int piwaCount = scan.nextInt();
-		
+
 		System.out.println("Podaj ilosc semestrow: ");
 		int semestrCount = scan.nextInt();
 
 		Plansza plansza = new Plansza(dlugosc, szerokosc);
-		
+
 		// random generation of actors
 		Student.setList(Student.generate_list(studenciCount, minimum));
 		Prowadzacy.setList(Prowadzacy.generate_list(prowadzacyCount));
@@ -209,7 +215,10 @@ public class Main {
 				System.out.println("Planszowka: " + Planszowka.getList().size());
 				System.out.println("p: " + Piwo.getList().size());
 
-				writeData("data.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()),String.valueOf(Kolokwium.getList().size()),String.valueOf(Materialy.getList().size()),String.valueOf(Planszowka.getList().size()),String.valueOf(Piwo.getList().size()) });
+				writeData("data.csv",
+						new String[] { String.valueOf(i), String.valueOf(Student.getList().size()),
+								String.valueOf(Kolokwium.getList().size()), String.valueOf(Materialy.getList().size()),
+								String.valueOf(Planszowka.getList().size()), String.valueOf(Piwo.getList().size()) });
 
 				System.out.println("\nAt the end of the day");
 
