@@ -1,13 +1,44 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Klasa prowadzacego, ktory chodzi po planszy i sprawdza przygotowanie do zajec
+ * studentow. Zaleznie od ich przygotowania odejmuje lub dodaje punkty ects oraz
+ * zadowolenia.
+ * 
+ * @see Postac
+ */
 public class Prowadzacy extends Postac {
+	/**
+	 * Lista postaci znajdujacych sie na planszy
+	 */
 	private static ArrayList<Prowadzacy> list;
 
+	/**
+	 * Stopien naukowy (lub tytul) prowadzacego
+	 * 
+	 * @see Tytul
+	 */
 	private Tytul stopien;
+	/**
+	 * Surowosc prowadzacego wplywajaca na jego ocenianie
+	 */
 	private double surowosc;
+	/**
+	 * Szacunek prowadzacego wplywajacy na wartosc bonusu jaki daje studentom po
+	 * spotkaniu
+	 */
 	private double szacunek;
 
+	/**
+	 * Konstruktor prowadzacego
+	 * 
+	 * @param stopien  stopien naukowy prowadzacego
+	 * @param surowosc surowosc prowadzacego
+	 * @param szacunek szacunek prowadzacego
+	 * @param zasieg   zasieg wzroku prowadzacego
+	 * @see Tytul
+	 */
 	public Prowadzacy(Tytul stopien, double surowosc, double szacunek, int zasieg) {
 		super(zasieg);
 
@@ -16,46 +47,103 @@ public class Prowadzacy extends Postac {
 		this.setSzacunek(szacunek);
 	}
 
+	/**
+	 * Getter dla listy
+	 * 
+	 * @return lista postaci
+	 */
 	public static ArrayList<Prowadzacy> getList() {
 		return list;
 	}
 
+	/**
+	 * Setter dla listy
+	 * 
+	 * @param list lista postaci do ustawienia w liscie
+	 */
 	public static void setList(ArrayList<Prowadzacy> list) {
 		Prowadzacy.list = list;
 	}
 
+	/**
+	 * Dodaje liste postaci do aktualnie istniejacej listy
+	 * 
+	 * @param list lista postaci do dodania do aktualnej listy
+	 */
 	public static void addToList(ArrayList<Prowadzacy> list) {
 		Prowadzacy.list.addAll(list);
 	}
 
+	/**
+	 * Getter dla stopnia
+	 * 
+	 * @return stopien
+	 * @see Tytul
+	 */
 	public Tytul getStopien() {
 		return stopien;
 	}
 
+	/**
+	 * Setter dla stopnia
+	 * 
+	 * @param stopien stopien naukowy
+	 */
 	public void setStopien(Tytul stopien) {
 		this.stopien = stopien;
 	}
 
+	/**
+	 * Getter dla surowosci
+	 * 
+	 * @return surowosc prowadzacego
+	 */
 	public double getSurowosc() {
 		return surowosc;
 	}
 
+	/**
+	 * Setter dla surowosci
+	 * 
+	 * @param surowosc surowosc prowadzacego
+	 */
 	public void setSurowosc(double surowosc) {
 		this.surowosc = surowosc;
 	}
 
+	/**
+	 * Zmienia aktualna surowosc o podana wartosc
+	 * 
+	 * @param surowosc surowosc prowadzacego
+	 */
 	public void changeSurowosc(double surowosc) {
 		this.surowosc += surowosc;
 	}
 
+	/**
+	 * Getter dla szacunku
+	 * 
+	 * @return szacunek prowadzacego
+	 */
 	public double getSzacunek() {
 		return szacunek;
 	}
 
+	/**
+	 * Setter dla szacunku
+	 * 
+	 * @param szacunek szacunek prowadzacego
+	 */
 	public void setSzacunek(double szacunek) {
 		this.szacunek = szacunek;
 	}
 
+	/**
+	 * Generuje liste postaci o losowych wskaznikach
+	 * 
+	 * @param ilosc ilosc postaci do wygenerowania
+	 * @return lista postaci
+	 */
 	public static ArrayList<Prowadzacy> generate_list(int ilosc) {
 		ArrayList<Prowadzacy> list = new ArrayList<>();
 		Random generator = new Random();
@@ -68,6 +156,14 @@ public class Prowadzacy extends Postac {
 		return list;
 	}
 
+	/**
+	 * Wykonuje akcje jaka podejmuje prowadzacy przez jeden cykl symulacji. Bada czy
+	 * w zasiegu wzroku znajduje sie jakis student i jesli go znajduje, to sprawdza
+	 * jego przygotowanie do zajec i zaleznie od wyniku daje odpowiedni bonus. W
+	 * przypadku niepowodzenia krazy losowo po planszy poszukujac studentow.
+	 * 
+	 * @see Student
+	 */
 	public void action() {
 		Random generator = new Random();
 

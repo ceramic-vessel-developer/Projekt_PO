@@ -2,16 +2,56 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Klasa studenta, ktory chodzi po planszy i szuka przedmiotow. Jesli znajdzie
+ * jakis przedmiot, to wybiera najblizszy i otrzymuje z tego powodu bonusy. W
+ * przypadku spotkania studenta idzie dalej, a w przypadku spotkania
+ * prowadzacego ucieka.
+ * 
+ * @see Postac
+ */
 public class Student extends Postac {
+	/**
+	 * Lista postaci znajdujacych sie na planszy
+	 */
 	static ArrayList<Student> list;
 
+	/**
+	 * Szczescie studenta wplywajace na jego powodzenie
+	 */
 	private double szczescie;
+	/**
+	 * Inteligencja studenta wplywajaca na jego powodzenie
+	 */
 	private double inteligencja;
+	/**
+	 * Studenckosc studenta wplywajaca na jego powodzenie
+	 */
 	private double studenckosc;
+	/**
+	 * Przygotowanie do zajec studenta wplywajace na jego powodzenie
+	 */
 	private double przygotowanieDoZajec;
+	/**
+	 * Zadowolenie studenta wplywajace na jego powodzenie
+	 */
 	private double zadowolenie;
+	/**
+	 * Punkty ects i jednoczesnie zdrowie studenta
+	 */
 	private int ects;
 
+	/**
+	 * Konstruktor studenta
+	 * 
+	 * @param szczescie            szczescie studenta
+	 * @param inteligencja         inteligencja studenta
+	 * @param studenckosc          studenckosc studenta
+	 * @param przygotowanieDoZajec przygotowanie do zajec studenta
+	 * @param zadowolenie          zadowolenie studenta
+	 * @param zasieg               zasieg wzroku studenta
+	 * @param ects                 punkty ects studenta
+	 */
 	public Student(double szczescie, double inteligencja, double studenckosc, double przygotowanieDoZajec,
 			double zadowolenie, int zasieg, int ects) {
 		super(zasieg);
@@ -24,66 +64,147 @@ public class Student extends Postac {
 		this.setZadowolenie(zadowolenie);
 	}
 
+	/**
+	 * Getter dla listy
+	 * 
+	 * @return lista postaci
+	 */
 	public static ArrayList<Student> getList() {
 		return list;
 	}
 
+	/**
+	 * Setter dla listy
+	 * 
+	 * @param list lista postaci do ustawienia w liscie
+	 */
 	public static void setList(ArrayList<Student> list) {
 		Student.list = list;
 	}
 
+	/**
+	 * Dodaje liste postaci do aktualnie istniejacej listy
+	 * 
+	 * @param list lista postaci do dodania do aktualnej listy
+	 */
 	public static void addToList(ArrayList<Student> list) {
 		Student.list.addAll(list);
 	}
 
+	/**
+	 * Getter dla szczescia
+	 * 
+	 * @return szczescie
+	 */
 	public double getSzczescie() {
 		return szczescie;
 	}
 
+	/**
+	 * Getter dla inteligencja
+	 * 
+	 * @return inteligencja
+	 */
 	public double getInteligencja() {
 		return inteligencja;
 	}
 
+	/**
+	 * Getter dla studenckosc
+	 * 
+	 * @return studenckosc
+	 */
 	public double getStudenckosc() {
 		return studenckosc;
 	}
 
+	/**
+	 * Getter dla przygotowanieDoZajec
+	 * 
+	 * @return przygotowanieDoZajec
+	 */
 	public double getPrzygotowanieDoZajec() {
 		return przygotowanieDoZajec;
 	}
 
+	/**
+	 * Setter dla przygotowanieDoZajec
+	 * 
+	 * @param przygotowanieDoZajec przygotowanie do zajec
+	 */
 	public void setPrzygotowanieDoZajec(double przygotowanieDoZajec) {
 		this.przygotowanieDoZajec = przygotowanieDoZajec;
 	}
 
+	/**
+	 * Zmienia aktualne przygotowanie do zajec o podana wartosc
+	 * 
+	 * @param przygotowanieDoZajec przygotowanie do zajec
+	 */
 	public void changePrzygotowanieDoZajec(double przygotowanieDoZajec) {
 		this.przygotowanieDoZajec += przygotowanieDoZajec;
 	}
 
+	/**
+	 * Getter dla zadowolenie
+	 * 
+	 * @return zadowolenie
+	 */
 	public double getZadowolenie() {
 		return zadowolenie;
 	}
 
+	/**
+	 * Setter dla zadowolenie
+	 * 
+	 * @param zadowolenie zadowolenie
+	 */
 	public void setZadowolenie(double zadowolenie) {
 		this.zadowolenie = zadowolenie;
 	}
 
+	/**
+	 * Zmienia aktualne zadowolenie o podana wartosc
+	 * 
+	 * @param zadowolenie zadowolenie
+	 */
 	public void changeZadowolenie(double zadowolenie) {
 		this.zadowolenie += zadowolenie;
 	}
 
+	/**
+	 * Getter dla ects
+	 * 
+	 * @return ects
+	 */
 	public int getEcts() {
 		return ects;
 	}
 
+	/**
+	 * Setter dla ects
+	 * 
+	 * @param ects punkty ects
+	 */
 	public void setEcts(int ects) {
 		this.ects = ects;
 	}
 
+	/**
+	 * Zmienia aktualne ects o podana wartosc
+	 * 
+	 * @param ects ects
+	 */
 	public void changeEcts(int ects) {
 		this.ects += ects;
 	}
 
+	/**
+	 * Generuje liste postaci o losowych wskaznikach
+	 * 
+	 * @param ilosc ilosc postaci do wygenerowania
+	 * @return lista postaci
+	 */
 	public static ArrayList<Student> generate_list(int ilosc, int minimum) {
 		ArrayList<Student> list = new ArrayList<>();
 		Random generator = new Random();
@@ -97,6 +218,13 @@ public class Student extends Postac {
 		return list;
 	}
 
+	/**
+	 * Student ucieka od prowadzacego w kierunku najbardziej od niego oddalonym
+	 * 
+	 * @param x wspolrzedna x prowadzacego
+	 * @param y wspolrzedna y prowadzacego
+	 * @see Prowadzacy
+	 */
 	public void runaway(int x, int y) {
 		int[] xy = new int[2];
 		Random generator = new Random();
@@ -207,6 +335,15 @@ public class Student extends Postac {
 		this.move(xy[0], xy[1]);
 	}
 
+	/**
+	 * Wykonuje akcje jaka podejmuje student przez jeden cykl symulacji. Bada czy w
+	 * zasiegu wzroku znajduje sie jakis przedmiot i jesli go znajduje, to sprawdza
+	 * uzywa go i zaleznie od wyniku daje odpowiedni bonus. W przypadku
+	 * niepowodzenia krazy losowo po planszy poszukujac przedmiotow. W przypadku
+	 * spotkania prowadzacego ucieka, a w przypadku spotkania studenta idzie dalej.
+	 * 
+	 * @see Prowadzacy
+	 */
 	public void action() {
 		Random generator = new Random();
 
@@ -284,6 +421,10 @@ public class Student extends Postac {
 		this.changeZadowolenie(modificators[1]);
 	}
 
+	/**
+	 * Sprawdza stan cech studenta, jesli jego ects lub zadowolenie spadlo ponizej
+	 * zera to student umiera
+	 */
 	public void checkStatus() {
 		if (this.ects < 0 || this.zadowolenie < 0) {
 			System.out.println("Student x: " + this.x + " y: " + this.y + " died");
