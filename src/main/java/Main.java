@@ -42,8 +42,7 @@ public class Main {
 		dzien += 1;
 	}
 
-	public static void writeData(String filePath, String[] data)
-	{
+	public static void writeData(String filePath, String[] data) {
 		File file = new File(filePath);
 		try {
 			FileWriter outputfile = new FileWriter(file,true);
@@ -57,13 +56,12 @@ public class Main {
 
 
 
-			writer.writeNext(data);
+			writer.writeNext(data,false);
 
 
 			writer.close();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -205,7 +203,7 @@ public class Main {
 			System.out.println("Planszowka: " + Planszowka.getList().size());
 			System.out.println("p: " + Piwo.getList().size());
 
-			writeData("lol.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()) });
+			writeData("lol3.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()) });
 
 			System.out.println("\nAt the end of the day");
 
