@@ -171,6 +171,8 @@ public class Plansza {
 						System.out.print('&');
 					} else if (obiekt instanceof Planszowka) {
 						System.out.print('#');
+					} else if (obiekt instanceof Materialy) {
+						System.out.print('M');
 					} else if (obiekt instanceof Piwo) {
 						System.out.print('U');
 					} else {

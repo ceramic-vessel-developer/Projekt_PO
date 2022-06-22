@@ -159,9 +159,15 @@ public class Main {
 		
 		System.out.println("Podaj poczatkowa ilosc prowadzacych: ");
 		int prowadzacyCount = scan.nextInt();
-		
+
 		System.out.println("Podaj poczatkowa ilosc kolokwiow: ");
 		int kolokwiaCount = scan.nextInt();
+		
+		System.out.println("Podaj poczatkowa ilosc materialow: ");
+		int materialyCount = scan.nextInt();
+		
+		System.out.println("Podaj poczatkowa ilosc planszowek: ");
+		int planszowkiCount = scan.nextInt();
 
 		System.out.println("Podaj poczatkowa ilosc piw: ");
 		int piwaCount = scan.nextInt();
@@ -175,12 +181,16 @@ public class Main {
 		Student.setList(Student.generate_list(studenciCount, minimum));
 		Prowadzacy.setList(Prowadzacy.generate_list(prowadzacyCount));
 		Kolokwium.setList(Kolokwium.generate_list(kolokwiaCount));
+		Materialy.setList(Materialy.generate_list(materialyCount));
+		Planszowka.setList(Planszowka.generate_list(planszowkiCount));
 		Piwo.setList(Piwo.generate_list(piwaCount));
 
 		// random displacement of actors
 		Plansza.placeObjectsInRandomOrder(Student.getList());
 		Plansza.placeObjectsInRandomOrder(Prowadzacy.getList());
 		Plansza.placeObjectsInRandomOrder(Kolokwium.getList());
+		Plansza.placeObjectsInRandomOrder(Materialy.getList());
+		Plansza.placeObjectsInRandomOrder(Planszowka.getList());
 		Plansza.placeObjectsInRandomOrder(Piwo.getList());
 
 		for (int i = 1; i <= LICZBA_DNI_SEMESTRU * semestrCount; i++) {
@@ -191,6 +201,8 @@ public class Main {
 			System.out.println("Student: " + Student.getList().size());
 			System.out.println("Prowadzacy: " + Prowadzacy.getList().size());
 			System.out.println("Kolokwium: " + Kolokwium.getList().size());
+			System.out.println("Materialy: " + Materialy.getList().size());
+			System.out.println("Planszowka: " + Planszowka.getList().size());
 			System.out.println("p: " + Piwo.getList().size());
 
 			writeData("lol.csv",new String[]{String.valueOf(i),String.valueOf(Student.getList().size()) });
