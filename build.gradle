@@ -2,17 +2,23 @@ plugins {
     id 'java'
 }
 
-
-dependencies{
-    implementation 'com.opencsv:opencsv:5.6'
-}
 repositories{
     mavenCentral()
 }
+
+dependencies{
+    implementation "com.opencsv:opencsv:5.3"
+}
+
+/*
+manifest{
+    attributes 'Main-Class': 'Main'
+}*/
+configurations.implementation.setCanBeResolved(true)
 jar{
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.implementation.collect {zipTree it}
     archivesBaseName='project'
-    archiveVersion='0.9.5'
-    manifest{
-        attributes 'Main-Class': 'Main'
-    }
+    archiveVersion= '0.9.6'
+    manifest.attributes "Main-Class":"Main"
 }

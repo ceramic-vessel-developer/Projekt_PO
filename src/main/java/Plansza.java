@@ -220,7 +220,7 @@ public class Plansza {
 	 * Wizualizuje plansze
 	 */
 	public static void visualize() {
-		System.out.println("@-student	§-prowadzacy	&-kolokwium\n#-planszowka	M-materialy	U-piwo");
+		System.out.println("@-student	%-prowadzacy	&-kolokwium\n#-planszowka	M-materialy	U-piwo");
 		for (int i = 0; i < getDlugosc() + 2; i++) {
 			System.out.print('-');
 		}
@@ -237,7 +237,7 @@ public class Plansza {
 					if (obiekt instanceof Student) {
 						System.out.print('@');
 					} else if (obiekt instanceof Prowadzacy) {
-						System.out.print("§");
+						System.out.print("%");
 					} else if (obiekt instanceof Kolokwium) {
 						System.out.print('&');
 					} else if (obiekt instanceof Planszowka) {
